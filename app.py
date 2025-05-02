@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def inicio():
-    return '<h1>¡Bienvenido a MyGymAI!</h1><p>Tu sistema inteligente de recomendaciones de ejercicios.</p>'
+    return render_template('inicio.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
