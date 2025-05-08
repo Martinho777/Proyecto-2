@@ -1,3 +1,10 @@
+Algoritmo de Recomendación Personalizada de Ejercicios
+
+Descripción:
+Este algoritmo selecciona ejercicios adecuados para un usuario según su objetivo de entrenamiento, nivel de experiencia y equipo disponible. Utiliza una base de datos en grafos para generar recomendaciones personalizadas.
+
+Pseudocódigo:
+
 Algoritmo recomendar_ejercicios(usuario):
 
   objetivo ← getObjetivo(usuario)
