@@ -1,0 +1,15 @@
+Algoritmo recomendar_ejercicios(usuario):
+
+  objetivo ← getObjetivo(usuario)
+  nivel ← getNivel(usuario)
+  equipos ← getEquipos(usuario)
+
+  ejercicios_posibles ← []
+
+  Para cada ejercicio en base_de_datos:
+    Si ejercicio.objetivo == objetivo Y
+       ejercicio.nivel == nivel Y
+       ejercicio.equipo EN equipos:
+         ejercicios_posibles.agregar(ejercicio)
+
+  retornar ejercicios_posibles
