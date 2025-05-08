@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro - MyGymAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>Registro - GymAI</header>
+
+    <form action="/registro" method="POST">
+        <label>Nombre completo</label>
+        <input type="text" name="nombre" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Contraseña</label>
+        <input type="password" name="password" required>
+
+        <label>Edad</label>
+        <input type="number" name="edad" required>
+
+        <label>Altura (cm)</label>
+        <input type="number" name="altura" required>
+
+        <label>Peso (kg)</label>
+        <input type="number" name="peso" required>
+
+        <label>Nivel de experiencia</label>
+        <select name="nivel" required>
+            <option disabled selected value="">Selecciona tu nivel</option>
+            <option>Principiante</option>
+            <option>Intermedio</option>
+            <option>Avanzado</option>
+        </select>
+
+        <label>Objetivo de entrenamiento</label>
+        <select name="objetivo" required>
+            <option disabled selected value="">Selecciona tu objetivo</option>
+            <option>Fuerza</option>
+            <option>Hipertrofia</option>
+            <option>Resistencia</option>
+        </select>
+
+        <label>¿Cuántos días a la semana quieres entrenar?</label>
+        <select name="dias_entreno" required>
+            <option disabled selected value="">Selecciona una opción</option>
+            <option value="1">1 día</option>
+            <option value="2">2 días</option>
+            <option value="3">3 días</option>
+            <option value="4">4 días</option>
+            <option value="5">5 días</option>
+            <option value="6">6 días</option>
+            <option value="7">7 días</option>
+        </select>
+
+        <button type="submit">Registrarme</button>
+    </form>
+</body>
+</html>

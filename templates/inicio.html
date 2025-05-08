@@ -1,48 +1,29 @@
-<!-- inicio.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>MyGymAI</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            text-align: center;
-            padding: 50px;
-        }
-        h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-        .menu {
-            margin-top: 30px;
-        }
-        .menu a {
-            display: inline-block;
-            margin: 15px;
-            padding: 12px 24px;
-            background-color: #1f1f1f;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            border: 1px solid #444;
-        }
-        .menu a:hover {
-            background-color: #333;
-        }
-    </style>
+    <title>GymAI - Inicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1> MyGymAI</h1>
-    <p>Tu sistema inteligente de recomendaciones de ejercicios</p>
-    
-    <div class="menu">
-        <a href="#">Iniciar sesión</a>
-        <a href="#">Calendario</a>
-        <a href="#">Mis ejercicios</a>
-        <a href="#">Opciones</a>
+    <header>GymAI.com</header>
+
+    <nav class="navbar">
+        <a href="#">Quiénes Somos</a>
+        <a href="#">Información Importante</a>
+        <a href="#">Membresías</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="image-area">
+            <p>Foto de personas fuertes ejemplares de gimnasio</p>
+            <p><em>“Tu cuerpo puede soportar casi todo… es tu mente la que tienes que convencer.”</em></p>
+        </div>
+
+        <div class="side-buttons">
+            <a href="#">Iniciar sesión</a>
+            <a href="/registro">Registrarme</a>
+        </div>
     </div>
 </body>
 </html>
