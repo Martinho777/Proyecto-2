@@ -7,16 +7,30 @@ Pseudocódigo:
 
 Algoritmo recomendar_ejercicios(usuario):
 
-  objetivo ← getObjetivo(usuario)
-  nivel ← getNivel(usuario)
-  equipos ← getEquipos(usuario)
+  objetivo_usuario ← obtener_objetivo(usuario)
+  nivel_usuario ← obtener_nivel(usuario)
+  equipos_usuario ← obtener_lista_equipos(usuario)
 
   ejercicios_posibles ← []
 
-  Para cada ejercicio en base_de_datos:
-    Si ejercicio.objetivo == objetivo Y
-       ejercicio.nivel == nivel Y
-       ejercicio.equipo EN equipos:
-         ejercicios_posibles.agregar(ejercicio)
+  Para cada ejercicio en grafo:
+    objetivos_ejercicio ← obtener_objetivos(ejercicio)
+    nivel_ejercicio ← obtener_nivel(ejercicio)
+    equipos_ejercicio ← obtener_equipos_requeridos(ejercicio)
+
+    Si objetivo_usuario EN objetivos_ejercicio Y
+       nivel_usuario == nivel_ejercicio Y
+       equipos_ejercicio INTERSECTA equipos_usuario:
+       
+       musculos ← obtener_musculos_trabajados(ejercicio)
+       movimiento ← obtener_tipo_movimiento(ejercicio)
+
+       resultado ← {
+         nombre: ejercicio.nombre,
+         musculos: musculos,
+         movimiento: movimiento
+       }
+
+       ejercicios_posibles.agregar(resultado)
 
   retornar ejercicios_posibles
