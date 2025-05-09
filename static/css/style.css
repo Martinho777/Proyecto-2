@@ -1,3 +1,6 @@
+
+/* CSS para la estetica */
+
 /* === ESTILO GENERAL === */
 body {
     background-color: #1c1c1c;
@@ -7,23 +10,12 @@ body {
     padding: 0;
 }
 
-/* === HEADER SUPERIOR === */
-header {
-    background-color: #262626;
-    padding: 20px;
-    text-align: center;
-    font-size: 26px;
-    font-weight: bold;
-    color: #fdd835;
-    letter-spacing: 1px;
-}
-
 /* === NAVBAR === */
 .navbar {
     display: flex;
     justify-content: center;
     background-color: #333;
-    padding: 12px;
+    padding: 15px;
     gap: 60px;
 }
 
@@ -40,38 +32,52 @@ header {
     background-color: #444;
 }
 
-/* === CONTENIDO PRINCIPAL === */
-.main-content {
+/* INICIO */
+
+/* === CONTENEDOR PRINCIPAL === */
+.main-container {
     display: flex;
     justify-content: space-between;
     padding: 40px;
-    max-width: 1200px;
-    margin: auto;
+    height: calc(100vh - 60px); 
+    box-sizing: border-box;
 }
 
-/* === ÁREA DE IMAGEN Y TEXTO MOTIVADOR === */
-.image-area {
-    background-color: #2e2e2e;
+/* === IMAGEN COMO FONDO CENTRAL === */
+.background-image {
     flex: 3;
-    height: 400px;
+    background-image: url('/static/img/portada.jpeg');
+    background-size: cover;
+    background-position: center;
     border-radius: 12px;
+    margin-right: 70px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 30px;
-    padding: 20px;
-    color: #cccccc;
-    text-align: center;
-    flex-direction: column;
+    align-items: flex-end;
+    padding: 30px;
+    height: 90%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
-/* === BOTONES LATERALES === */
+/* === TEXTO SOBRE LA IMAGEN === */
+.mensaje {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 1.4em;
+    font-style: italic;
+    color: #fff;
+    max-width: 60%;
+    margin-left: auto;
+    text-align: right;
+}
+
+/* === BOTONES A LA DERECHA === */
 .side-buttons {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
     justify-content: center;
+    gap: 20px;
 }
 
 .side-buttons a {
@@ -79,11 +85,12 @@ header {
     color: #fdd835;
     border: 2px solid #fdd835;
     border-radius: 10px;
-    padding: 15px;
+    padding: 15px 25px;
     text-align: center;
     text-decoration: none;
     font-weight: bold;
     transition: background-color 0.2s ease;
+    width: 150px;
 }
 
 .side-buttons a:hover {
@@ -91,16 +98,30 @@ header {
     color: #1c1c1c;
 }
 
-/* === ESTILO DE FORMULARIOS === */
+
+/* REGISTRO */
+
+/* === FORMULARIO GENERAL === */
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     max-width: 600px;
     margin: auto;
-    padding: 40px;
+    padding: 50px;
+    background-color: #2e2e2e;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
+/* === TÍTULO DEL FORMULARIO === */
+form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fdd835;
+}
+
+/* === CAMPOS DE ENTRADA Y SELECCIÓN === */
 input, select {
     padding: 12px;
     border-radius: 8px;
@@ -109,11 +130,13 @@ input, select {
     color: #ffffff;
 }
 
+/* === ETIQUETAS DE LOS CAMPOS === */
 label {
     font-weight: bold;
     margin-top: 10px;
 }
 
+/* === BOTÓN DE ENVÍO === */
 button {
     padding: 12px 20px;
     background-color: #fdd835;
@@ -125,7 +148,12 @@ button {
     transition: background-color 0.2s ease;
 }
 
+/* === EFECTO HOVER EN EL BOTÓN === */
 button:hover {
     background-color: #fff176;
 }
 
+/* === SEPARACIÓN SUPERIOR EN REGISTRO === */
+.registro-separado {
+    margin-top: 40px;
+}

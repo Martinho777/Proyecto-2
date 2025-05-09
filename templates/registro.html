@@ -6,56 +6,79 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <header>Registro - GymAI</header>
 
-    <form action="/registro" method="POST">
-        <label>Nombre completo</label>
-        <input type="text" name="nombre" required>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="/">Inicio</a>
+        <a href="#">Quiénes Somos</a>
+        <a href="#">Información Importante</a>
+        <a href="#">Membresías</a>
+    </nav>
 
-        <label>Email</label>
-        <input type="email" name="email" required>
+    <!-- FORMULARIO CENTRADO -->
+    <div class="main-content registro-separado">
+        <form action="/registro" method="POST">
+            <h1>Registro</h1>
 
-        <label>Contraseña</label>
-        <input type="password" name="password" required>
+            <!-- Datos de contacto -->
+            <label>Teléfono</label>
+            <input type="tel" name="telefono" required>
 
-        <label>Edad</label>
-        <input type="number" name="edad" required>
+            <label>Correo electrónico de contacto</label>
+            <input type="email" name="correo_contacto" required>
 
-        <label>Altura (cm)</label>
-        <input type="number" name="altura" required>
+            <hr style="margin: 20px 0; border: 1px solid #444;">
 
-        <label>Peso (kg)</label>
-        <input type="number" name="peso" required>
+            <!-- Datos del algoritmo -->
+            <label>Nombre completo</label>
+            <input type="text" name="nombre" required>
 
-        <label>Nivel de experiencia</label>
-        <select name="nivel" required>
-            <option disabled selected value="">Selecciona tu nivel</option>
-            <option>Principiante</option>
-            <option>Intermedio</option>
-            <option>Avanzado</option>
-        </select>
+            <label>Email</label>
+            <input type="email" name="email" required>
 
-        <label>Objetivo de entrenamiento</label>
-        <select name="objetivo" required>
-            <option disabled selected value="">Selecciona tu objetivo</option>
-            <option>Fuerza</option>
-            <option>Hipertrofia</option>
-            <option>Resistencia</option>
-        </select>
+            <label>Contraseña</label>
+            <input type="password" name="password" required>
 
-        <label>¿Cuántos días a la semana quieres entrenar?</label>
-        <select name="dias_entreno" required>
-            <option disabled selected value="">Selecciona una opción</option>
-            <option value="1">1 día</option>
-            <option value="2">2 días</option>
-            <option value="3">3 días</option>
-            <option value="4">4 días</option>
-            <option value="5">5 días</option>
-            <option value="6">6 días</option>
-            <option value="7">7 días</option>
-        </select>
+            <label>Edad</label>
+            <input type="number" name="edad" required>
 
-        <button type="submit">Registrarme</button>
-    </form>
+            <label>Altura (cm)</label>
+            <input type="number" name="altura" required>
+
+            <label>Peso (kg)</label>
+            <input type="number" name="peso" required>
+
+            <label>Nivel de experiencia</label>
+            <select name="nivel" required>
+                <option disabled selected value="">Selecciona tu nivel</option>
+                <option>Principiante</option>
+                <option>Intermedio</option>
+                <option>Avanzado</option>
+            </select>
+
+            <label>Objetivo de entrenamiento</label>
+            <select name="objetivo" required>
+                <option disabled selected value="">Selecciona tu objetivo</option>
+                <option>Fuerza</option>
+                <option>Hipertrofia</option>
+                <option>Resistencia</option>
+            </select>
+
+            <label>¿Cuántos días a la semana quieres entrenar?</label>
+            <select name="dias_entreno" required>
+                <option disabled selected value="">Selecciona una opción</option>
+                <option value="1">1 día</option>
+                <option value="2">2 días</option>
+                <option value="3">3 días</option>
+                <option value="4">4 días</option>
+                <option value="5">5 días</option>
+                <option value="6">6 días</option>
+                <option value="7">7 días</option>
+            </select>
+
+            <button type="submit">Registrarme</button>
+        </form>
+    </div>
+
 </body>
 </html>
