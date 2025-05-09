@@ -1,20 +1,23 @@
 from flask import Flask, render_template, request, redirect
+from py2neo import Graph
 
 app = Flask(__name__)
 
-# Página de inicio
+# Conexión a Neo4j
+graph = Graph("bolt://localhost:7687", auth=("neo4j", "DinoPythons3000"))
+
 @app.route('/')
 def inicio():
     return render_template('inicio.html')
 
-# Página de registro de usuario
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
     if request.method == 'POST':
-        # Obtener datos del formulario
+        # Datos del formulario
         datos = {
-            'nombre': request.form['nombre'],
+            'telefono': request.form['telefono'],
             'email': request.form['email'],
+            'nombre': request.form['nombre'],
             'password': request.form['password'],
             'edad': request.form['edad'],
             'altura': request.form['altura'],
@@ -24,15 +27,27 @@ def registro():
             'dias_entreno': request.form['dias_entreno']
         }
 
-        # 🔧 Aquí conectaremos con Neo4j para guardar al usuario
-        print("[INFO] Usuario registrado:")
-        for k, v in datos.items():
-            print(f"{k}: {v}")
+        # Cypher para crear nodo Usuario en Neo4j
+        query = """
+        CREATE (u:Usuario {
+            telefono: $telefono,
+            email: $email,
+            nombre: $nombre,
+            password: $password,
+            edad: toInteger($edad),
+            altura: toFloat($altura),
+            peso: toFloat($peso),
+            nivel: $nivel,
+            objetivo: $objetivo,
+            dias_entreno: toInteger($dias_entreno)
+        })
+        """
+
+        graph.run(query, parameters=datos)
 
         return redirect('/')
     
     return render_template('registro.html')
 
-# Ejecutar servidor
 if __name__ == '__main__':
     app.run(debug=True)
