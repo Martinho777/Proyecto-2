@@ -2,40 +2,101 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>GymAI - Inicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymAI - Tu asistente de entrenamiento</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Añadimos fuente de Google para mejorar la tipografía -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <!-- NAVBAR SUPERIOR -->
-    <nav class="navbar">
-        <a href="#">Quiénes Somos</a>
-        <a href="#">Información Importante</a>
-        <a href="#">Membresías</a>
-    </nav>
-
-    <!-- CONTENEDOR PRINCIPAL -->
-    <div class="main-container">
-        <!-- IMAGEN DE FONDO CON MENSAJE A LA DERECHA -->
-        <div class="background-image">
-            <div class="mensaje">
-                “Tu cuerpo puede soportar casi todo… es tu mente la que tienes que convencer.”
-            </div>
-        </div>
-
-        <!-- BOTONES A LA DERECHA CON ESTILO -->
-        <div class="side-buttons horizontal">
-            <a href="/login" class="user-profile">
-                <div class="user-profile-inner">
-                    Iniciar sesión
+    <!-- Estructura semántica con header -->
+    <header>
+        <nav class="navbar" aria-label="Navegación principal">
+            <div class="navbar-container">
+                <div class="logo">
+                    <a href="/" aria-label="Inicio">GymAI</a>
                 </div>
-            </a>
+                <div class="nav-links">
+                    <a href="#" class="nav-item">Quiénes Somos</a>
+                    <a href="#" class="nav-item">Información</a>
+                    <a href="#" class="nav-item">Membresías</a>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Menú móvil">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
 
-            <a href="/registro" class="styled-button">
-                Registrarme
-            </a>
+    <main>
+        <!-- Hero section con imagen de fondo y mensaje motivacional -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-image">
+                    <div class="hero-message">
+                        <blockquote>
+                            "Tu cuerpo puede soportar casi todo... es tu mente la que tienes que convencer."
+                        </blockquote>
+                    </div>
+                </div>
+                
+                <div class="hero-actions">
+                    <a href="/login" class="btn btn-outline">
+                        Iniciar sesión
+                    </a>
+                    <a href="/registro" class="btn btn-primary">
+                        Registrarme
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de características (nueva) -->
+        <section class="features">
+            <div class="container">
+                <h2>Potencia tu entrenamiento</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Seguimiento inteligente</h3>
+                        <p>Registra tus ejercicios y visualiza tu progreso con análisis detallados.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Objetivos personalizados</h3>
+                        <p>Establece metas específicas y recibe recomendaciones adaptadas a ti.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>Algoritmo IA</h3>
+                        <p>Nuestro sistema de IA analiza tu rendimiento para optimizar tus rutinas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 GymAI - Todos los derechos reservados</p>
         </div>
-    </div>
+    </footer>
 
+    <!-- Script para menú móvil -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 </html>
