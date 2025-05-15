@@ -2,80 +2,257 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro - MyGymAI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - GymAI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Añadimos fuente de Google para mejorar la tipografía -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Estructura semántica con header -->
+    <header>
+        <nav class="navbar" aria-label="Navegación principal">
+            <div class="navbar-container">
+                <div class="logo">
+                    <a href="/" aria-label="Inicio">GymAI</a>
+                </div>
+                <div class="nav-links">
+                    <a href="/" class="nav-item">Inicio</a>
+                    <a href="#" class="nav-item">Quiénes Somos</a>
+                    <a href="#" class="nav-item">Información</a>
+                    <a href="#" class="nav-item">Membresías</a>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Menú móvil">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <a href="/">Inicio</a>
-        <a href="#">Quiénes Somos</a>
-        <a href="#">Información Importante</a>
-        <a href="#">Membresías</a>
-    </nav>
+    <main>
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-card registration-card">
+                    <div class="auth-header">
+                        <h1>Crear Cuenta</h1>
+                        <p>Únete a GymAI y comienza a potenciar tu entrenamiento</p>
+                    </div>
 
-    <!-- FORMULARIO CENTRADO -->
-    <div class="main-content registro-separado">
-        <form action="/registro" method="POST">
-            <h1>Registro</h1>
+                    <form action="/registro" method="POST" class="auth-form">
+                        <!-- Tabs para organizar el formulario -->
+                        <div class="form-tabs">
+                            <button type="button" class="tab-btn active" data-tab="personal">Datos Personales</button>
+                            <button type="button" class="tab-btn" data-tab="training">Datos de Entrenamiento</button>
+                        </div>
 
-            <!-- Datos de contacto -->
-            <label>Teléfono</label>
-            <input type="tel" name="telefono" required>
+                        <!-- Sección 1: Datos Personales -->
+                        <div class="tab-content active" id="personal-tab">
+                            <div class="form-group">
+                                <label for="nombre">Nombre completo</label>
+                                <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
+                            </div>
 
-            <label>Correo electrónico</label>
-            <input type="email" name="email" required>
+                            <div class="form-group">
+                                <label for="email">Correo electrónico</label>
+                                <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com">
+                            </div>
 
-            <hr style="margin: 20px 0; border: 1px solid #444;">
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" required placeholder="Tu número de teléfono">
+                            </div>
 
-            <!-- Datos del algoritmo -->
-            <label>Nombre completo</label>
-            <input type="text" name="nombre" required>
+                            <div class="form-group">
+                                <label for="password">Contraseña</label>
+                                <input type="password" id="password" name="password" required placeholder="Crea una contraseña segura">
+                                <div class="password-strength">
+                                    <div class="strength-meter"></div>
+                                    <span class="strength-text">Fuerza de la contraseña</span>
+                                </div>
+                            </div>
 
-            <label>Contraseña</label>
-            <input type="password" name="password" required>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-primary btn-block next-btn">Continuar</button>
+                            </div>
+                        </div>
 
-            <label>Edad</label>
-            <input type="number" name="edad" required>
+                        <!-- Sección 2: Datos de Entrenamiento -->
+                        <div class="tab-content" id="training-tab">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="edad">Edad</label>
+                                    <input type="number" id="edad" name="edad" required min="16" max="100" placeholder="Años">
+                                </div>
 
-            <label>Altura (cm)</label>
-            <input type="number" name="altura" required>
+                                <div class="form-group">
+                                    <label for="altura">Altura (cm)</label>
+                                    <input type="number" id="altura" name="altura" required min="100" max="250" placeholder="cm">
+                                </div>
 
-            <label>Peso (kg)</label>
-            <input type="number" name="peso" required>
+                                <div class="form-group">
+                                    <label for="peso">Peso (kg)</label>
+                                    <input type="number" id="peso" name="peso" required min="30" max="300" step="0.1" placeholder="kg">
+                                </div>
+                            </div>
 
-            <label>Nivel de experiencia</label>
-            <select name="nivel" required>
-                <option disabled selected value="">Selecciona tu nivel</option>
-                <option>Principiante</option>
-                <option>Intermedio</option>
-                <option>Avanzado</option>
-            </select>
+                            <div class="form-group">
+                                <label for="nivel">Nivel de experiencia</label>
+                                <select id="nivel" name="nivel" required>
+                                    <option value="" disabled selected>Selecciona tu nivel</option>
+                                    <option value="Principiante">Principiante</option>
+                                    <option value="Intermedio">Intermedio</option>
+                                    <option value="Avanzado">Avanzado</option>
+                                </select>
+                            </div>
 
-            <label>Objetivo de entrenamiento</label>
-            <select name="objetivo" required>
-                <option disabled selected value="">Selecciona tu objetivo</option>
-                <option>Fuerza</option>
-                <option>Hipertrofia</option>
-                <option>Resistencia</option>
-            </select>
+                            <div class="form-group">
+                                <label for="objetivo">Objetivo de entrenamiento</label>
+                                <select id="objetivo" name="objetivo" required>
+                                    <option value="" disabled selected>Selecciona tu objetivo</option>
+                                    <option value="Fuerza">Fuerza</option>
+                                    <option value="Hipertrofia">Hipertrofia</option>
+                                    <option value="Resistencia">Resistencia</option>
+                                </select>
+                            </div>
 
-            <label>¿Cuántos días a la semana quieres entrenar?</label>
-            <select name="dias_entreno" required>
-                <option disabled selected value="">Selecciona una opción</option>
-                <option value="1">1 día</option>
-                <option value="2">2 días</option>
-                <option value="3">3 días</option>
-                <option value="4">4 días</option>
-                <option value="5">5 días</option>
-                <option value="6">6 días</option>
-                <option value="7">7 días</option>
-            </select>
+                            <div class="form-group">
+                                <label for="dias_entreno">¿Cuántos días a la semana quieres entrenar?</label>
+                                <select id="dias_entreno" name="dias_entreno" required>
+                                    <option value="" disabled selected>Selecciona una opción</option>
+                                    <option value="1">1 día</option>
+                                    <option value="2">2 días</option>
+                                    <option value="3">3 días</option>
+                                    <option value="4">4 días</option>
+                                    <option value="5">5 días</option>
+                                    <option value="6">6 días</option>
+                                    <option value="7">7 días</option>
+                                </select>
+                            </div>
 
-            <button type="submit">Registrarme</button>
-        </form>
-    </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline prev-btn">Atrás</button>
+                                <button type="submit" class="btn btn-primary">Registrarme</button>
+                            </div>
+                        </div>
+                    </form>
 
+                    <div class="auth-footer">
+                        <p>¿Ya tienes una cuenta? <a href="/login" class="text-link">Inicia sesión</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 GymAI - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <!-- Script para menú móvil y tabs del formulario -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    mobileMenuBtn.classList.toggle('active');
+                });
+            }
+
+            // Form tabs functionality
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const nextBtn = document.querySelector('.next-btn');
+            const prevBtn = document.querySelector('.prev-btn');
+
+            if (tabBtns.length > 0) {
+                tabBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const tabId = btn.getAttribute('data-tab');
+                        
+                        // Update active tab button
+                        tabBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        
+                        // Show selected tab content
+                        tabContents.forEach(content => {
+                            content.classList.remove('active');
+                            if (content.id === `${tabId}-tab`) {
+                                content.classList.add('active');
+                            }
+                        });
+                    });
+                });
+            }
+
+            // Next button functionality
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    document.querySelector('[data-tab="training"]').click();
+                });
+            }
+
+            // Previous button functionality
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    document.querySelector('[data-tab="personal"]').click();
+                });
+            }
+
+            // Simple password strength meter
+            const passwordInput = document.getElementById('password');
+            const strengthMeter = document.querySelector('.strength-meter');
+            const strengthText = document.querySelector('.strength-text');
+
+            if (passwordInput && strengthMeter && strengthText) {
+                passwordInput.addEventListener('input', function() {
+                    const val = passwordInput.value;
+                    let strength = 0;
+                    
+                    if (val.length >= 8) strength += 1;
+                    if (val.match(/[a-z]/) && val.match(/[A-Z]/)) strength += 1;
+                    if (val.match(/\d/)) strength += 1;
+                    if (val.match(/[^a-zA-Z\d]/)) strength += 1;
+                    
+                    switch (strength) {
+                        case 0:
+                            strengthMeter.style.width = '0%';
+                            strengthMeter.style.backgroundColor = '#ff4d4d';
+                            strengthText.textContent = 'Muy débil';
+                            break;
+                        case 1:
+                            strengthMeter.style.width = '25%';
+                            strengthMeter.style.backgroundColor = '#ff4d4d';
+                            strengthText.textContent = 'Débil';
+                            break;
+                        case 2:
+                            strengthMeter.style.width = '50%';
+                            strengthMeter.style.backgroundColor = '#ffa64d';
+                            strengthText.textContent = 'Media';
+                            break;
+                        case 3:
+                            strengthMeter.style.width = '75%';
+                            strengthMeter.style.backgroundColor = '#4dff4d';
+                            strengthText.textContent = 'Fuerte';
+                            break;
+                        case 4:
+                            strengthMeter.style.width = '100%';
+                            strengthMeter.style.backgroundColor = '#4dff4d';
+                            strengthText.textContent = 'Muy fuerte';
+                            break;
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

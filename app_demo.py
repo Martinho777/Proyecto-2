@@ -22,7 +22,7 @@ def registro():
             'dias_entreno': request.form['dias_entreno']
         }
 
-        print("📦 Datos recibidos (demo, no guardados):")
+        print("Datos recibidos (demo, no guardados):")
         for clave, valor in datos.items():
             print(f"{clave}: {valor}")
 
@@ -37,7 +37,7 @@ def login():
         email = request.form['email']
         password = request.form['password']
 
-        print("🧪 Intento de login (demo, no verificado):")
+        print(" Intento de login (demo, no verificado):")
         print(f"Email: {email}, Password: {password}")
 
         # Simula login exitoso
