@@ -22,14 +22,28 @@ def registro():
             'dias_entreno': request.form['dias_entreno']
         }
 
-        # Simula guardado: imprime los datos en consola
-        print("📦 Datos recibidos (sin Neo4j):")
-        for k, v in datos.items():
-            print(f"{k}: {v}")
+        print("📦 Datos recibidos (demo, no guardados):")
+        for clave, valor in datos.items():
+            print(f"{clave}: {valor}")
 
         return redirect('/')
     
     return render_template('registro.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        print("🧪 Intento de login (demo, no verificado):")
+        print(f"Email: {email}, Password: {password}")
+
+        # Simula login exitoso
+        return redirect('/')
+
+    return render_template('login.html', error=error)
 
 if __name__ == '__main__':
     app.run(debug=True)

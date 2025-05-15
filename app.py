@@ -13,7 +13,6 @@ def inicio():
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
     if request.method == 'POST':
-        # Datos del formulario
         datos = {
             'telefono': request.form['telefono'],
             'email': request.form['email'],
@@ -27,7 +26,6 @@ def registro():
             'dias_entreno': request.form['dias_entreno']
         }
 
-        # Cypher para crear nodo Usuario en Neo4j
         query = """
         CREATE (u:Usuario {
             telefono: $telefono,
@@ -42,12 +40,32 @@ def registro():
             dias_entreno: toInteger($dias_entreno)
         })
         """
-
         graph.run(query, parameters=datos)
-
         return redirect('/')
     
     return render_template('registro.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        query = """
+        MATCH (u:Usuario)
+        WHERE u.email = $email AND u.password = $password
+        RETURN u
+        """
+        result = graph.run(query, email=email, password=password).data()
+
+        if result:
+            print(f"✅ Login exitoso de: {email}")
+            return redirect('/')
+        else:
+            error = "Credenciales incorrectas. Intenta nuevamente."
+
+    return render_template('login.html', error=error)
 
 if __name__ == '__main__':
     app.run(debug=True)
