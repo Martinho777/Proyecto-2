@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiénes Somos — GymAI</title>
+  <!-- reutilizamos tu CSS y fuente -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- ========== NAVBAR (copiada de inicio.html) ========== -->
+  <header>
+    <nav class="navbar" aria-label="Navegación principal">
+      <div class="navbar-container">
+        <div class="logo"><a href="/">GymAI</a></div>
+        <div class="nav-links">
+          <a href="/">Inicio</a>
+          <a href="/quienes" class="nav-item">Quiénes Somos</a>
+          <a href="#" class="nav-item">Información</a>
+          <a href="#" class="nav-item">Membresías</a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Menú móvil"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ========== SECTION 1 – PRESENTACIÓN ========== -->
+  <section class="about-section container">
+    <h1>Quiénes Somos</h1>
+    <p>
+      Somos <strong>GymAI</strong>, un equipo de estudiantes apasionados por el fitness y la tecnología.
+      Nuestro objetivo es facilitar a cualquier persona la creación de rutinas inteligentes
+      mediante recomendaciones basadas en grafos e inteligencia artificial.
+    </p>
+  </section>
+
+  <!-- ========== SECTION 2 – OBJETIVO Y MOTIVACIÓN ========== -->
+  <section class="mission-section container">
+    <h2>Nuestro Objetivo</h2>
+    <p>
+      Queremos motivar a los usuarios a lograr sus metas físicas ofreciéndoles planes de
+      entrenamiento adaptados a su nivel, objetivos y equipo disponible. Creemos que
+      la personalización es la clave para la constancia y el progreso real.
+    </p>
+  </section>
+
+  <!-- ========== SECTION 3 – INTEGRANTES ========== -->
+  <section class="team-section">
+    <!-- Tarjeta 1 -->
+    <div class="team-card">
+      <img src="{{ url_for('static', filename='img/integrante1.jpg') }}" alt="Foto Integrante 1">
+      <div class="team-text">
+        <h3>Integrante 1 – Rol</h3>
+        <p>"Frase inspiradora de la persona número 1."</p>
+      </div>
+    </div>
+
+    <!-- Tarjeta 2 -->
+    <div class="team-card">
+      <img src="{{ url_for('static', filename='img/integrante2.jpg') }}" alt="Foto Integrante 2">
+      <div class="team-text">
+        <h3>Integrante 2 – Rol</h3>
+        <p>"Frase motivacional de la persona número 2."</p>
+      </div>
+    </div>
+
+    <!-- Tarjeta 3 -->
+    <div class="team-card">
+      <img src="{{ url_for('static', filename='img/integrante3.jpg') }}" alt="Foto Integrante 3">
+      <div class="team-text">
+        <h3>Integrante 3 – Rol</h3>
+        <p>"Cita favorita o lema del integrante 3."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER (igual al resto) ========== -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 GymAI – Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+</body>
+</html>
