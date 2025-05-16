@@ -45,5 +45,10 @@ def login():
 
     return render_template('login.html', error=error)
 
+@app.route('/quienes')
+def quienes():
+    return render_template('quienes.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
