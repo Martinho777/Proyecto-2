@@ -589,6 +589,7 @@ footer {
 .team-section {
   display: flex;
   flex-direction: column;
+  align-items: center; /* <-- centra horizontalmente las tarjetas */
   gap: 40px;
   padding: 40px 20px;
 }
@@ -596,23 +597,30 @@ footer {
 .team-card {
   display: flex;
   align-items: center;
+  justify-content: center;  /* <-- centra imagen y texto en una línea */
   gap: 30px;
-  flex-wrap: wrap;
+  max-width: 800px;
+  width: 100%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .team-card img {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .team-text h3 {
-  margin: 0 0 8px;
+  margin-bottom: 8px;
+  font-size: 1.3rem;
 }
 
 .team-text p {
-  margin: 0;
   font-style: italic;
+  color: #444;
 }
