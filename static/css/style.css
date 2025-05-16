@@ -572,3 +572,47 @@ footer {
         flex-direction: column;
     }
 }
+
+/* Organización general */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* Secciones de texto */
+.about-section, .mission-section {
+  text-align: center;
+}
+
+/* Tarjetas de equipo */
+.team-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px 20px;
+}
+
+.team-card {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.team-card img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.team-text h3 {
+  margin: 0 0 8px;
+}
+
+.team-text p {
+  margin: 0;
+  font-style: italic;
+}
