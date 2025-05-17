@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - GymAI</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dashboard-body">
+    <!-- Sidebar de navegación -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <a href="/dashboard">GymAI</a>
+            </div>
+            <button class="sidebar-close" aria-label="Cerrar menú">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="user-profile">
+            <div class="user-avatar">
+                <span>JD</span>
+            </div>
+            <div class="user-info">
+                <h3>Juan Díaz</h3>
+                <p>Nivel: Intermedio</p>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="/dashboard" class="nav-item active">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="9"></rect>
+                    <rect x="14" y="3" width="7" height="5"></rect>
+                    <rect x="14" y="12" width="7" height="9"></rect>
+                    <rect x="3" y="16" width="7" height="5"></rect>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="/calendario" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>Calendario</span>
+            </a>
+            <a href="/musculos" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6.5 6.5L17.5 17.5"></path>
+                    <path d="M17.5 6.5L6.5 17.5"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                <span>Visualización Muscular</span>
+            </a>
+            <a href="/estadisticas" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                <span>Estadísticas</span>
+            </a>
+            <a href="/perfil" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Mi Perfil</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="/logout" class="nav-item logout">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                <span>Cerrar Sesión</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <!-- Header superior -->
+        <header class="dashboard-header">
+            <button class="sidebar-toggle" aria-label="Abrir menú">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            
+            <div class="page-title">
+                <h1>Dashboard</h1>
+                <p>Bienvenido de nuevo, Juan</p>
+            </div>
+            
+            <div class="header-actions">
+                <button class="btn-icon notifications" aria-label="Notificaciones">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    <span class="badge">3</span>
+                </button>
+                
+                <a href="/nuevo-ejercicio" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Registrar Ejercicio
+                </a>
+            </div>
+        </header>
+
+        <!-- Contenido del dashboard -->
+        <div class="dashboard-content">
+            <!-- Tarjetas de resumen -->
+            <section class="summary-cards">
+                <div class="card streak-card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                            </svg>
+                        </div>
+                        <div class="card-info">
+                            <h3>Racha Actual</h3>
+                            <div class="card-value">7 días</div>
+                            <div class="card-trend positive">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                    <polyline points="17 6 23 6 23 12"></polyline>
+                                </svg>
+                                <span>+2 desde la semana pasada</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card volume-card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 20V10"></path>
+                                <path d="M12 20V4"></path>
+                                <path d="M6 20v-6"></path>
+                            </svg>
+                        </div>
+                        <div class="card-info">
+                            <h3>Volumen Semanal</h3>
+                            <div class="card-value">12,540 kg</div>
+                            <div class="card-trend positive">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                    <polyline points="17 6 23 6 23 12"></polyline>
+                                </svg>
+                                <span>+8% desde la semana pasada</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card workout-card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </div>
+                        <div class="card-info">
+                            <h3>Entrenamientos</h3>
+                            <div class="card-value">4 esta semana</div>
+                            <div class="card-trend neutral">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                                <span>Igual que la semana pasada</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card pr-card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                                <line x1="16" y1="8" x2="2" y2="22"></line>
+                                <line x1="17.5" y1="15" x2="9" y2="15"></line>
+                            </svg>
+                        </div>
+                        <div class="card-info">
+                            <h3>Nuevos PRs</h3>
+                            <div class="card-value">3 este mes</div>
+                            <div class="card-trend positive">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                    <polyline points="17 6 23 6 23 12"></polyline>
+                                </svg>
+                                <span>+1 desde el mes pasado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Gráfico de progreso -->
+            <section class="progress-chart-section">
+                <div class="section-header">
+                    <h2>Progreso de Entrenamiento</h2>
+                    <div class="section-actions">
+                        <select id="exercise-select" class="select-control">
+                            <option value="squat">Sentadilla</option>
+                            <option value="bench">Press de Banca</option>
+                            <option value="deadlift">Peso Muerto</option>
+                        </select>
+                        <select id="time-range" class="select-control">
+                            <option value="week">Última Semana</option>
+                            <option value="month" selected>Último Mes</option>
+                            <option value="year">Último Año</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="progressChart"></canvas>
+                </div>
+            </section>
+            
+            <!-- Próximo entrenamiento y músculos trabajados -->
+            <div class="two-column-grid">
+                <!-- Próximo entrenamiento -->
+                <section class="next-workout-section">
+                    <div class="section-header">
+                        <h2>Próximo Entrenamiento</h2>
+                        <a href="/calendario" class="text-link">Ver calendario</a>
+                    </div>
+                    
+                    <div class="next-workout-card">
+                        <div class="workout-date">
+                            <div class="date-day">15</div>
+                            <div class="date-month">Mayo</div>
+                        </div>
+                        
+                        <div class="workout-info">
+                            <h3>Entrenamiento de Pierna</h3>
+                            <div class="workout-meta">
+                                <span class="workout-time">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    18:00 - 19:30
+                                </span>
+                                <span class="workout-exercises">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"></path>
+                                    </svg>
+                                    6 ejercicios
+                                </span>
+                            </div>
+                            
+                            <ul class="exercise-list">
+                                <li>Sentadilla con barra <span>4 × 8</span></li>
+                                <li>Prensa de piernas <span>3 × 12</span></li>
+                                <li>Extensiones de cuádriceps <span>3 × 15</span></li>
+                                <li>Curl de isquiotibiales <span>3 × 12</span></li>
+                                <li>Elevaciones de pantorrilla <span>4 × 20</span></li>
+                                <li>Abductores <span>3 × 15</span></li>
+                            </ul>
+                            
+                            <div class="workout-actions">
+                                <a href="/editar-entrenamiento" class="btn btn-outline btn-sm">Editar</a>
+                                <a href="/iniciar-entrenamiento" class="btn btn-primary btn-sm">Iniciar</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Músculos trabajados -->
+                <section class="muscles-section">
+                    <div class="section-header">
+                        <h2>Músculos Trabajados</h2>
+                        <a href="/musculos" class="text-link">Ver completo</a>
+                    </div>
+                    
+                    <div class="muscle-map-container">
+                        <div class="muscle-map">
+                            <!-- Aquí iría el SVG del cuerpo humano con los músculos coloreados -->
+                            <svg viewBox="0 0 200 300" class="body-svg">
+                                <!-- Silueta del cuerpo (simplificada) -->
+                                <path d="M100,30 C120,30 130,45 130,60 C130,75 120,85 120,95 L120,120 C120,130 130,140 130,160 C130,180 120,220 120,240 C120,260 130,270 130,280 C130,290 120,300 100,300 C80,300 70,290 70,280 C70,270 80,260 80,240 C80,220 70,180 70,160 C70,140 80,130 80,120 L80,95 C80,85 70,75 70,60 C70,45 80,30 100,30 Z" fill="#333" />
+                                
+                                <!-- Cabeza -->
+                                <circle cx="100" cy="20" r="15" fill="#333" />
+                                
+                                <!-- Músculos con diferentes intensidades basadas en el entrenamiento -->
+                                <!-- Pectorales (muy trabajados) -->
+                                <path d="M85,70 C85,60 95,60 100,65 C105,60 115,60 115,70 C115,80 105,85 100,85 C95,85 85,80 85,70 Z" fill="#fdd835" opacity="0.9" class="muscle" data-muscle="chest" />
+                                
+                                <!-- Hombros (trabajados) -->
+                                <path d="M70,65 C70,60 75,55 80,60 L80,70 C75,75 70,70 70,65 Z" fill="#fdd835" opacity="0.7" class="muscle" data-muscle="shoulder-left" />
+                                <path d="M130,65 C130,60 125,55 120,60 L120,70 C125,75 130,70 130,65 Z" fill="#fdd835" opacity="0.7" class="muscle" data-muscle="shoulder-right" />
+                                
+                                <!-- Bíceps (poco trabajados) -->
+                                <path d="M70,80 C65,85 65,95 70,100 L75,100 L75,80 Z" fill="#fdd835" opacity="0.4" class="muscle" data-muscle="bicep-left" />
+                                <path d="M130,80 C135,85 135,95 130,100 L125,100 L125,80 Z" fill="#fdd835" opacity="0.4" class="muscle" data-muscle="bicep-right" />
+                                
+                                <!-- Abdominales (trabajados) -->
+                                <path d="M90,90 C90,85 110,85 110,90 C110,100 110,110 110,120 C110,125 90,125 90,120 C90,110 90,100 90,90 Z" fill="#fdd835" opacity="0.6" class="muscle" data-muscle="abs" />
+                                
+                                <!-- Cuádriceps (muy trabajados) -->
+                                <path d="M80,160 C80,150 90,150 95,150 L95,210 C90,210 80,200 80,190 Z" fill="#fdd835" opacity="0.9" class="muscle" data-muscle="quad-left" />
+                                <path d="M120,160 C120,150 110,150 105,150 L105,210 C110,210 120,200 120,190 Z" fill="#fdd835" opacity="0.9" class="muscle" data-muscle="quad-right" />
+                                
+                                <!-- Pantorrillas (poco trabajadas) -->
+                                <path d="M85,230 C85,220 90,220 95,220 L95,260 C90,260 85,250 85,240 Z" fill="#fdd835" opacity="0.3" class="muscle" data-muscle="calf-left" />
+                                <path d="M115,230 C115,220 110,220 105,220 L105,260 C110,260 115,250 115,240 Z" fill="#fdd835" opacity="0.3" class="muscle" data-muscle="calf-right" />
+                            </svg>
+                        </div>
+                        
+                        <div class="muscle-stats">
+                            <h3>Distribución del Entrenamiento</h3>
+                            <ul class="muscle-stat-list">
+                                <li>
+                                    <div class="muscle-name">Piernas</div>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 85%"></div>
+                                    </div>
+                                    <div class="percentage">85%</div>
+                                </li>
+                                <li>
+                                    <div class="muscle-name">Pecho</div>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 70%"></div>
+                                    </div>
+                                    <div class="percentage">70%</div>
+                                </li>
+                                <li>
+                                    <div class="muscle-name">Espalda</div>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 55%"></div>
+                                    </div>
+                                    <div class="percentage">55%</div>
+                                </li>
+                                <li>
+                                    <div class="muscle-name">Hombros</div>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 45%"></div>
+                                    </div>
+                                    <div class="percentage">45%</div>
+                                </li>
+                                <li>
+                                    <div class="muscle-name">Brazos</div>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 30%"></div>
+                                    </div>
+                                    <div class="percentage">30%</div>
+                                </li>
+                            </ul>
+                            
+                            <div class="recommendation">
+                                <h4>Recomendación IA</h4>
+                                <p>Considera aumentar el entrenamiento de brazos y pantorrillas para un desarrollo más equilibrado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Últimos ejercicios registrados -->
+            <section class="recent-exercises-section">
+                <div class="section-header">
+                    <h2>Últimos Ejercicios Registrados</h2>
+                    <a href="/historial" class="text-link">Ver todos</a>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Ejercicio</th>
+                                <th>Series × Reps</th>
+                                <th>Peso</th>
+                                <th>Volumen</th>
+                                <th>RPE</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>14 Mayo</td>
+                                <td>Press de Banca</td>
+                                <td>4 × 8</td>
+                                <td>80 kg</td>
+                                <td>2,560 kg</td>
+                                <td>8</td>
+                                <td>
+                                    <button class="btn-icon" aria-label="Editar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>14 Mayo</td>
+                                <td>Remo con Barra</td>
+                                <td>3 × 10</td>
+                                <td>70 kg</td>
+                                <td>2,100 kg</td>
+                                <td>7</td>
+                                <td>
+                                    <button class="btn-icon" aria-label="Editar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>12 Mayo</td>
+                                <td>Sentadilla</td>
+                                <td>5 × 5</td>
+                                <td>100 kg</td>
+                                <td>2,500 kg</td>
+                                <td>9</td>
+                                <td>
+                                    <button class="btn-icon" aria-label="Editar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>12 Mayo</td>
+                                <td>Peso Muerto</td>
+                                <td>3 × 6</td>
+                                <td>120 kg</td>
+                                <td>2,160 kg</td>
+                                <td>9</td>
+                                <td>
+                                    <button class="btn-icon" aria-label="Editar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>10 Mayo</td>
+                                <td>Press Militar</td>
+                                <td>4 × 8</td>
+                                <td>50 kg</td>
+                                <td>1,600 kg</td>
+                                <td>8</td>
+                                <td>
+                                    <button class="btn-icon" aria-label="Editar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Script para inicializar el gráfico -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle sidebar en móvil
+            const sidebarToggle = document.querySelector('.sidebar-toggle');
+            const sidebarClose = document.querySelector('.sidebar-close');
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            
+            if (sidebarToggle && sidebar) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.add('active');
+                });
+            }
+            
+            if (sidebarClose && sidebar) {
+                sidebarClose.addEventListener('click', function() {
+                    sidebar.classList.remove('active');
+                });
+            }
+            
+            // Inicializar gráfico de progreso
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            const progressChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1 Mayo', '5 Mayo', '8 Mayo', '12 Mayo', '14 Mayo'],
+                    datasets: [{
+                        label: 'Peso (kg)',
+                        data: [90, 92.5, 95, 97.5, 100],
+                        backgroundColor: 'rgba(253, 216, 53, 0.2)',
+                        borderColor: '#fdd835',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointBackgroundColor: '#fdd835',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#aaa'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#aaa'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#333',
+                            titleColor: '#fdd835',
+                            bodyColor: '#fff',
+                            borderColor: '#fdd835',
+                            borderWidth: 1,
+                            padding: 10,
+                            displayColors: false
+                        }
+                    }
+                }
+            });
+            
+            // Cambiar datos del gráfico al cambiar ejercicio
+            const exerciseSelect = document.getElementById('exercise-select');
+            if (exerciseSelect) {
+                exerciseSelect.addEventListener('change', function() {
+                    let newData;
+                    
+                    switch(this.value) {
+                        case 'bench':
+                            newData = [75, 77.5, 77.5, 80, 80];
+                            break;
+                        case 'deadlift':
+                            newData = [110, 115, 115, 120, 120];
+                            break;
+                        default: // squat
+                            newData = [90, 92.5, 95, 97.5, 100];
+                    }
+                    
+                    progressChart.data.datasets[0].data = newData;
+                    progressChart.update();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
