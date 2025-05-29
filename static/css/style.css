@@ -1217,3 +1217,51 @@ footer {
         justify-content: space-between;
     }
 }
+
+.dashboard-section {
+    margin: 2rem;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.descripcion {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.grupo-muscular {
+    margin-bottom: 2rem;
+}
+
+.grupo-muscular h3 {
+    color: #444;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.ejercicios-lista {
+    list-style-type: none;
+    padding-left: 1rem;
+}
+
+.ejercicios-lista li {
+    margin-bottom: 0.3rem;
+}
+
+.ejercicios-lista a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.ejercicios-lista a:hover {
+    text-decoration: underline;
+}

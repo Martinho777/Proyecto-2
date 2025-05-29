@@ -1,0 +1,22 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<div class="dashboard-section">
+    <h2>Grupos musculares y ejercicios</h2>
+    <p class="descripcion">Selecciona un grupo muscular para ver sus ejercicios asociados.</p>
+
+    {% for grupo in grupos %}
+        <div class="grupo-muscular">
+            <h3>{{ grupo.grupo }}</h3>
+            <ul class="ejercicios-lista">
+                {% for ejercicio in grupo.ejercicios %}
+                    <li>
+                        <a href="{{ url_for('detalle_ejercicio', nombre=ejercicio) }}">
+                            {{ ejercicio }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

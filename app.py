@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 from py2neo import Graph
 
 app = Flask(__name__)
+app.secret_key = "clave_secreta_segura"
+
 graph = Graph("bolt://localhost:7687", auth=("neo4j", "DinoPythons3000"))
 
 @app.route('/')
@@ -75,12 +77,12 @@ def login():
 
         if resultado:
             usuario = resultado[0]['u']
-            user_data = {
+            session['usuario'] = {
                 'nombre': usuario['nombre'],
                 'nivel': usuario['nivel'],
                 'email': usuario['email']
             }
-            return render_template('dashboard.html', user=user_data)
+            return redirect('/dashboard')
         else:
             error = "Usuario o contraseña incorrectos."
 
@@ -88,52 +90,85 @@ def login():
 
 @app.route('/dashboard')
 def dashboard():
-    user_data = {
-        'nombre': 'Juan',
-        'nivel': 'Intermedio',
-        'email': 'juan@example.com'
-    }
+    if 'usuario' not in session:
+        return redirect('/login')
 
-    stats = {
-        'racha': 7,
-        'racha_cambio': '+2',
-        'volumen': '12,540',
-        'volumen_cambio': '+8%',
-        'entrenamientos': 4,
-        'entrenamientos_cambio': 'Igual',
-        'prs': 3,
-        'prs_cambio': '+1'
-    }
+    user_data = session['usuario']
 
-    return render_template('dashboard.html', user=user_data, stats=stats)
+    # Aquí puedes conectar futuras métricas estadísticas personalizadas
+    return render_template('dashboard.html', user=user_data)
 
 @app.route('/logout')
 def logout():
+    session.pop('usuario', None)
     return redirect('/')
 
 @app.route('/calendario')
 def calendario():
-    return render_template('dashboard.html', active_page='calendario')
+    if 'usuario' not in session:
+        return redirect('/login')
+    return render_template('dashboard.html', active_page='calendario', user=session['usuario'])
 
 @app.route('/musculos')
 def musculos():
-    return render_template('dashboard.html', active_page='musculos')
+    if 'usuario' not in session:
+        return redirect('/login')
+
+    query = """
+    MATCH (e:Ejercicio)-[:ACTIVA_PRIMARIO|:ACTIVA_SECUNDARIO]->(s:SubMusculo)-[:PERTENECE_A]->(g:GrupoMuscular)
+    RETURN g.nombre AS grupo, COLLECT(DISTINCT e.nombre) AS ejercicios
+    ORDER BY grupo
+    """
+    resultados = graph.run(query).data()
+    return render_template('musculos.html', grupos=resultados, user=session['usuario'])
 
 @app.route('/estadisticas')
 def estadisticas():
-    return render_template('dashboard.html', active_page='estadisticas')
+    if 'usuario' not in session:
+        return redirect('/login')
+    return render_template('dashboard.html', active_page='estadisticas', user=session['usuario'])
 
 @app.route('/perfil')
 def perfil():
-    return render_template('dashboard.html', active_page='perfil')
+    if 'usuario' not in session:
+        return redirect('/login')
+    return render_template('dashboard.html', active_page='perfil', user=session['usuario'])
 
 @app.route('/nuevo-ejercicio')
 def nuevo_ejercicio():
-    return render_template('dashboard.html', active_page='nuevo-ejercicio')
+    if 'usuario' not in session:
+        return redirect('/login')
+    return render_template('dashboard.html', active_page='nuevo-ejercicio', user=session['usuario'])
 
 @app.route('/quienes')
 def quienes():
     return render_template('quienes.html')
+
+@app.route('/ejercicio/<nombre>')
+def detalle_ejercicio(nombre):
+    if 'usuario' not in session:
+        return redirect('/login')
+
+    query = """
+    MATCH (e:Ejercicio {nombre: $nombre})
+    OPTIONAL MATCH (e)-[:ACTIVA_PRIMARIO]->(s1:SubMusculo)-[:PERTENECE_A]->(g1:GrupoMuscular)
+    OPTIONAL MATCH (e)-[:ACTIVA_SECUNDARIO]->(s2:SubMusculo)-[:PERTENECE_A]->(g2:GrupoMuscular)
+    OPTIONAL MATCH (e)-[:ES_TIPO]->(t:Tipo)
+    OPTIONAL MATCH (e)-[:REQUIERE_NIVEL]->(n:Nivel)
+    RETURN 
+        e.nombre AS ejercicio,
+        COLLECT(DISTINCT s1.nombre) AS primarios,
+        COLLECT(DISTINCT s2.nombre) AS secundarios,
+        t.nombre AS tipo,
+        n.nombre AS nivel
+    """
+    resultado = graph.run(query, nombre=nombre).data()
+
+    if resultado:
+        data = resultado[0]
+        return render_template('detalle_ejercicio.html', ejercicio=data, user=session['usuario'])
+    else:
+        return f"Ejercicio '{nombre}' no encontrado", 404
 
 if __name__ == '__main__':
     app.run(debug=True)

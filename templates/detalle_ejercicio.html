@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Ejercicio</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ ejercicio.ejercicio }}</h1>
+
+        <section>
+            <h2>Tipo</h2>
+            <p>{{ ejercicio.tipo }}</p>
+        </section>
+
+        <section>
+            <h2>Nivel</h2>
+            <p>{{ ejercicio.nivel }}</p>
+        </section>
+
+        <section>
+            <h2>Submúsculos Primarios</h2>
+            {% if ejercicio.primarios %}
+                <ul>
+                    {% for musculo in ejercicio.primarios %}
+                        <li>{{ musculo }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No se encontraron.</p>
+            {% endif %}
+        </section>
+
+        <section>
+            <h2>Submúsculos Secundarios</h2>
+            {% if ejercicio.secundarios %}
+                <ul>
+                    {% for musculo in ejercicio.secundarios %}
+                        <li>{{ musculo }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No se encontraron.</p>
+            {% endif %}
+        </section>
+
+        <a href="/musculos" class="btn">Volver a la lista de ejercicios</a>
+    </div>
+</body>
+</html>
