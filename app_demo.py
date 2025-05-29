@@ -2,16 +2,28 @@ from flask import Flask, render_template, request, redirect, session
 import json
 
 app = Flask(__name__)
-app.secret_key = "clave_demo_segura"
+app.secret_key = "clave_secreta_segura"
 
-# Cargar ejercicios de un archivo JSON simulado
-with open('ejercicios_demo.json', 'r', encoding='utf-8') as f:
-    datos_demo = json.load(f)
-    ejercicios = datos_demo.get("ejercicios", [])
+# Cargar los datos desde records.json
+with open("records.json", "r", encoding="utf-8") as f:
+    datos = json.load(f)
+
+# Filtrar nodos por tipo
+usuarios = [n for n in datos if "Usuario" in n["etiquetas"]]
+ejercicios = [n for n in datos if "Ejercicio" in n["etiquetas"]]
+submusculos = [n for n in datos if "SubMusculo" in n["etiquetas"]]
+grupos = [n for n in datos if "GrupoMuscular" in n["etiquetas"]]
 
 @app.route('/')
 def inicio():
     return render_template('inicio.html')
+
+@app.route('/registro', methods=['GET', 'POST'])
+def registro():
+    if request.method == 'POST':
+        # Registro falso (no guarda nada)
+        return redirect('/login')
+    return render_template('registro.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -19,43 +31,73 @@ def login():
     if request.method == 'POST':
         identificador = request.form['identificador']
         password = request.form['password']
-        # Simulación básica: cualquier usuario funciona si el password es 'demo'
-        if password == 'demo':
-            session['user'] = {'nombre': identificador, 'nivel': 'Intermedio', 'email': f'{identificador}@demo.com'}
-            return redirect('/dashboard')
-        else:
-            error = "Usuario o contraseña incorrectos."
-    return render_template('login.html', error=error)
 
-@app.route('/logout')
-def logout():
-    session.pop('user', None)
-    return redirect('/')
+        for u in usuarios:
+            props = u["propiedades"]
+            if (props["email"] == identificador or props["usuario"] == identificador) and props["password"] == password:
+                session['user'] = {
+                    'nombre': props["nombre"],
+                    'nivel': props["nivel"],
+                    'email': props["email"]
+                }
+                return redirect('/dashboard')
+        error = "Credenciales incorrectas"
+    return render_template('login.html', error=error)
 
 @app.route('/dashboard')
 def dashboard():
-    user = session.get('user', {'nombre': 'Visitante', 'nivel': 'Desconocido'})
-    return render_template('dashboard.html', user=user, stats={})
+    if 'user' not in session:
+        return redirect('/login')
+    user = session['user']
+    stats = {
+        'racha': 0,
+        'racha_cambio': '0',
+        'volumen': '0',
+        'volumen_cambio': '0%',
+        'entrenamientos': 0,
+        'entrenamientos_cambio': '0',
+        'prs': 0,
+        'prs_cambio': '0'
+    }
+    return render_template('dashboard.html', user=user, stats=stats)
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
 
 @app.route('/musculos')
 def musculos():
-    grupos = {}
-    for e in ejercicios:
-        for sub in e["primarios"]:
-            grupos.setdefault(sub, []).append(e["nombre"])
-    resultados = [{'grupo': k, 'ejercicios': list(set(v))} for k, v in grupos.items()]
-    return render_template('musculos.html', grupos=resultados)
+    grupos_listos = []
+    for grupo in grupos:
+        nombre = grupo["propiedades"]["nombre"]
+        grupos_listos.append({"grupo": nombre, "ejercicios": []})  # Sin relaciones, solo nombre
+    return render_template('musculos.html', grupos=grupos_listos)
 
 @app.route('/ejercicio/<nombre>')
 def detalle_ejercicio(nombre):
-    for e in ejercicios:
-        if e["nombre"] == nombre:
-            return render_template('detalle_ejercicio.html', ejercicio=e)
-    return f"Ejercicio '{nombre}' no encontrado", 404
+    resultado = next((e for e in ejercicios if e["propiedades"]["nombre"] == nombre), None)
+    if not resultado:
+        return f"Ejercicio '{nombre}' no encontrado", 404
+    data = {
+        "ejercicio": nombre,
+        "primarios": [],
+        "secundarios": [],
+        "tipo": "Compuesto",
+        "nivel": "Intermedio"
+    }
+    return render_template("detalle_ejercicio.html", ejercicio=data)
 
 @app.route('/quienes')
 def quienes():
     return render_template('quienes.html')
+
+@app.route('/calendario')
+@app.route('/estadisticas')
+@app.route('/perfil')
+@app.route('/nuevo-ejercicio')
+def en_construccion():
+    return render_template("dashboard.html", active_page="en_construccion")
 
 if __name__ == '__main__':
     app.run(debug=True)
