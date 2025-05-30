@@ -1,98 +1,19 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiénes Somos — GymAI</title>
-  <!-- reutilizamos tu CSS y fuente -->
-  <link rel="stylesheet" href="../static/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
+{% extends "base.html" %}
 
-<body>
-  <!-- ========== NAVBAR (copiada de inicio.html) ========== -->
-  <header>
-    <nav class="navbar" aria-label="Navegación principal">
-      <div class="navbar-container">
-        <div class="logo"><a href="/">GymAI</a></div>
-        <div class="nav-links">
-          <a href="/">Inicio</a>
-          <a href="/quienes" class="nav-item">Quiénes Somos</a>
-          <a href="#" class="nav-item">Información</a>
-          <a href="#" class="nav-item">Membresías</a>
-        </div>
-        <button class="mobile-menu-btn" aria-label="Menú móvil"><span></span><span></span><span></span></button>
-      </div>
-    </nav>
-  </header>
+{% block title %}¿Quiénes Somos? | Mi Gimnasio Virtual{% endblock %}
 
-  <!-- ========== SECTION 1 – PRESENTACIÓN ========== -->
-  <section class="about-section container">
-    <h1>Quiénes Somos</h1>
+{% block content %}
+<div class="formulario-container">
+    <h2>¿Quiénes somos?</h2>
     <p>
-      Somos <strong>GymAI</strong>, un equipo de estudiantes apasionados por el fitness y la tecnología.
-      Nuestro objetivo es facilitar a cualquier persona la creación de rutinas inteligentes
-      mediante recomendaciones basadas en grafos e inteligencia artificial.
+        Somos un equipo apasionado por el fitness y la tecnología. Este proyecto busca combinar la ciencia del entrenamiento con herramientas digitales modernas, ayudando a las personas a alcanzar sus metas físicas de forma estructurada y personalizada.
     </p>
-  </section>
-
-  <!-- ========== SECTION 2 – OBJETIVO Y MOTIVACIÓN ========== -->
-  <section class="mission-section container">
-    <h2>Nuestro Objetivo</h2>
     <p>
-      Queremos motivar a los usuarios a lograr sus metas físicas ofreciéndoles planes de
-      entrenamiento adaptados a su nivel, objetivos y equipo disponible. Creemos que
-      la personalización es la clave para la constancia y el progreso real.
+        La plataforma ofrece recomendaciones automáticas basadas en tus objetivos, nivel y progreso, apoyado por una base de datos inteligente y visualizaciones musculares interactivas.
     </p>
-  </section>
-
-  <!-- ========== SECTION 3 – INTEGRANTES ========== -->
-  <section class="team-section">
-    <!-- Tarjeta 1 -->
-    <div class="team-card">
-      <img src="{{ url_for('static', filename='img/integrante1.jpeg') }}" alt="Foto Integrante 1">
-      <div class="team-text">
-        <h3>Javier Castillo – UX Pump Designer</h3>
-        <p>"Cosas malas le suceden a buenas personas."</p>
-        <p>"Encargado de que la experiencia del usuario sea tan fluida como una buena sesión de cardio.
-          Diseña interfaces visuales motivadoras, intuitivas y atractivas para mantener a los usuarios 
-          comprometidos y satisfechos con su progreso."
-      </div>
-    </div>
-
-    <!-- Tarjeta 2 -->
-    <div class="team-card">
-      <img src="{{ url_for('static', filename='img/integrante2.jpeg') }}" alt="Foto Integrante 2">
-      <div class="team-text">
-        <h3>Martin Villatoro – Chief Fitness Visionary </h3>
-        <p>"Tú puedes ser lo que quieras ser."</p>
-        <p>Responsable de la dirección general del proyecto y la visión a largo plazo.
-          Este rol define los objetivos estratégicos de la página, supervisa el 
-          desarrollo de funcionalidades innovadoras y se asegura de que todo esté alineado
-          con la misión de promover una vida saludable.</p>
-      </div>
-    </div>
-
-    <!-- Tarjeta 3 -->
-    <div class="team-card">
-      <img src="{{ url_for('static', filename='img/integrante3.jpeg') }}" alt="Foto Integrante 3">
-      <div class="team-text">
-        <h3>Jorge Morales – Workout Content Alchemist</h3>
-        <p>" "</p>
-        <p>Creador y curador maestro del contenido de ejercicios.
-          Diseña rutinas personalizadas, investiga nuevas tendencias fitness y adapta los 
-          planes de entrenamiento según el perfil del usuario. También traduce ciencia 
-          del ejercicio en recomendaciones prácticas.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== FOOTER (igual al resto) ========== -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 GymAI – Todos los derechos reservados</p>
-    </div>
-  </footer>
-
-</body>
-</html>
+    <p>
+        Proyecto desarrollado como parte de una iniciativa académica y de innovación aplicada. ¡Gracias por ser parte del cambio!
+    </p>
+    <a href="{{ url_for('auth.login') }}" class="btn">Iniciar sesión</a>
+</div>
+{% endblock %}

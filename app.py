@@ -1,30 +1,21 @@
-from flask import Flask
+from flask import Flask, render_template
 from routes.auth_routes import auth_bp
-from routes.dashboard_routes import dashboard_bp
-from routes.musculos_routes import musculos_bp
-from routes.perfil_routes import perfil_bp
-from routes.calendario_routes import calendario_bp
-from routes.estadisticas_routes import estadisticas_bp
-from routes.ejercicios_routes import ejercicios_bp
-from routes.quienes_routes import quienes_bp
 
 app = Flask(__name__)
 app.secret_key = "clave_secreta_segura"
 
-# Registrar Blueprints
+# Registrar blueprints
 app.register_blueprint(auth_bp)
-app.register_blueprint(dashboard_bp)
-app.register_blueprint(musculos_bp)
-app.register_blueprint(perfil_bp)
-app.register_blueprint(calendario_bp)
-app.register_blueprint(estadisticas_bp)
-app.register_blueprint(ejercicios_bp)
-app.register_blueprint(quienes_bp)
 
-# Ruta raíz (puedes redirigir si lo deseas)
+# Página principal
 @app.route('/')
 def inicio():
-    return "<h2>Página de inicio. Usa /login o /registro para comenzar.</h2>"
+    return render_template('inicio.html')
+
+# Ruta directa para quienes.html
+@app.route('/quienes')
+def quienes():
+    return render_template('quienes.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
