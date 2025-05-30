@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from routes.auth_routes import auth_bp
 from routes.dashboard_routes import dashboard_bp
+from routes.ejercicio_routes import ejercicio_bp  # Nuevo blueprint para detalles
 
 app = Flask(__name__)
 app.secret_key = "clave_secreta_segura"
@@ -8,6 +9,7 @@ app.secret_key = "clave_secreta_segura"
 # Registrar blueprints
 app.register_blueprint(auth_bp)
 app.register_blueprint(dashboard_bp)
+app.register_blueprint(ejercicio_bp)
 
 # Página principal
 @app.route('/')

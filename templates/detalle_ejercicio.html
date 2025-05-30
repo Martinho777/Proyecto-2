@@ -1,0 +1,30 @@
+<!-- templates/detalle_ejercicio.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ ejercicio.nombre }}</title>
+</head>
+<body>
+  <h1>{{ ejercicio.nombre }}</h1>
+
+  <p><strong>Tipo de ejercicio:</strong> {{ ejercicio.tipo }}</p>
+  <p><strong>Nivel requerido:</strong> {{ ejercicio.nivel }}</p>
+
+  <h3>Músculos principales activados:</h3>
+  <ul>
+    {% for musculo in ejercicio.primarios %}
+      <li>{{ musculo }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Músculos secundarios activados:</h3>
+  <ul>
+    {% for musculo in ejercicio.secundarios %}
+      <li>{{ musculo }}</li>
+    {% endfor %}
+  </ul>
+
+  <a href="/recomendaciones">← Volver</a>
+</body>
+</html>
