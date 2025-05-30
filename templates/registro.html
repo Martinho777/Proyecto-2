@@ -1,37 +1,138 @@
 {% extends "base.html" %}
 
-{% block title %}Registro | Mi Gimnasio Virtual{% endblock %}
+{% block title %}Registro - GymAI{% endblock %}
 
 {% block content %}
 <div class="formulario-container">
-    <h2>Crear una cuenta</h2>
+    <!-- Icono de registro -->
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary-color);">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="8.5" cy="7" r="4"></circle>
+            <line x1="20" y1="8" x2="20" y2="14"></line>
+            <line x1="23" y1="11" x2="17" y2="11"></line>
+        </svg>
+    </div>
+
+    <h2>Crear Cuenta</h2>
+    <p style="margin-bottom: 2rem; color: var(--text-secondary);">Únete a GymAI y comienza tu transformación fitness</p>
+    
     {% if error %}
-        <p class="error">{{ error }}</p>
+        <div class="error">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+            {{ error }}
+        </div>
     {% endif %}
-    <form method="POST">
-        <input type="text" name="nombre" placeholder="Nombre completo" required>
-        <input type="text" name="usuario" placeholder="Nombre de usuario" required>
-        <input type="email" name="email" placeholder="Correo electrónico" required>
-        <input type="password" name="password" placeholder="Contraseña" required>
-        <input type="text" name="telefono" placeholder="Teléfono" required>
-        <input type="number" name="edad" placeholder="Edad" required>
-        <input type="number" name="altura" placeholder="Altura (cm)" required>
-        <input type="number" name="peso" placeholder="Peso (kg)" required>
-        <select name="nivel" required>
-            <option value="" disabled selected>Nivel</option>
-            <option value="Principiante">Principiante</option>
-            <option value="Intermedio">Intermedio</option>
-            <option value="Avanzado">Avanzado</option>
-        </select>
-        <select name="objetivo" required>
-            <option value="" disabled selected>Objetivo</option>
-            <option value="Hipertrofia">Hipertrofia</option>
-            <option value="Resistencia">Resistencia</option>
-            <option value="Fuerza">Fuerza</option>
-        </select>
-        <input type="number" name="dias_entreno" placeholder="Días de entrenamiento por semana" required>
-        <button type="submit" class="btn">Registrarse</button>
+    
+    <form method="POST" novalidate>
+        <!-- Información personal -->
+        <div class="form-section">
+            <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.1rem;">Información Personal</h3>
+            
+            <input type="text" name="nombre" placeholder="Nombre completo" required autocomplete="name">
+            <input type="text" name="usuario" placeholder="Nombre de usuario" required autocomplete="username">
+            <input type="email" name="email" placeholder="Correo electrónico" required autocomplete="email">
+            <input type="password" name="password" placeholder="Contraseña" required autocomplete="new-password" minlength="6">
+            <input type="tel" name="telefono" placeholder="Teléfono (opcional)" autocomplete="tel">
+        </div>
+        
+        <!-- Información física -->
+        <div class="form-section" style="margin-top: 1.5rem;">
+            <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.1rem;">Información Física</h3>
+            
+            <input type="number" name="edad" placeholder="Edad" required min="13" max="100">
+            <input type="number" name="altura" placeholder="Altura (cm)" required min="100" max="250">
+            <input type="number" name="peso" placeholder="Peso (kg)" required min="30" max="300" step="0.1">
+        </div>
+        
+        <!-- Información de entrenamiento -->
+        <div class="form-section" style="margin-top: 1.5rem;">
+            <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.1rem;">Información de Entrenamiento</h3>
+            
+            <select name="nivel" required>
+                <option value="" disabled selected>Selecciona tu nivel</option>
+                <option value="Principiante">🟢 Principiante (0-6 meses)</option>
+                <option value="Intermedio">🟡 Intermedio (6 meses - 2 años)</option>
+                <option value="Avanzado">🔴 Avanzado (2+ años)</option>
+            </select>
+            
+            <select name="objetivo" required>
+                <option value="" disabled selected>¿Cuál es tu objetivo?</option>
+                <option value="Hipertrofia">💪 Hipertrofia (Ganar músculo)</option>
+                <option value="Resistencia">🏃 Resistencia (Mejorar cardio)</option>
+                <option value="Fuerza">🏋️ Fuerza (Levantar más peso)</option>
+                <option value="Perdida_peso">⚖️ Pérdida de peso</option>
+                <option value="Mantenimiento">🎯 Mantenimiento</option>
+            </select>
+            
+            <input type="number" name="dias_entreno" placeholder="Días de entrenamiento por semana" required min="1" max="7">
+        </div>
+        
+        <button type="submit" class="btn" style="width: 100%; margin-top: 2rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="8.5" cy="7" r="4"></circle>
+                <line x1="20" y1="8" x2="20" y2="14"></line>
+                <line x1="23" y1="11" x2="17" y2="11"></line>
+            </svg>
+            Crear Mi Cuenta
+        </button>
     </form>
-    <p>¿Ya tienes cuenta? <a href="{{ url_for('auth.login') }}">Inicia sesión aquí</a></p>
+    
+    <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+        <p style="margin-bottom: 0.5rem;">¿Ya tienes cuenta?</p>
+        <a href="{{ url_for('auth.login') }}" style="font-weight: 600;">
+            Inicia sesión aquí
+        </a>
+    </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        const passwordInput = document.querySelector('input[name="password"]');
+        const emailInput = document.querySelector('input[name="email"]');
+        
+        // Validación de contraseña
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            const isValid = password.length >= 6;
+            
+            if (password.length > 0) {
+                this.style.borderColor = isValid ? 'var(--success-color)' : 'var(--error-color)';
+            }
+        });
+        
+        // Validación de email
+        emailInput.addEventListener('blur', function() {
+            const email = this.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const isValid = emailRegex.test(email);
+            
+            if (email.length > 0) {
+                this.style.borderColor = isValid ? 'var(--success-color)' : 'var(--error-color)';
+            }
+        });
+        
+        // Validación general para campos requeridos
+        const requiredInputs = form.querySelectorAll('input[required], select[required]');
+        requiredInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.type !== 'email' && this.type !== 'password') {
+                    if (this.value.trim() === '') {
+                        this.style.borderColor = 'var(--error-color)';
+                    } else {
+                        this.style.borderColor = 'var(--success-color)';
+                    }
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}

@@ -1,18 +1,104 @@
 {% extends "base.html" %}
 
-{% block title %}Iniciar Sesión | Mi Gimnasio Virtual{% endblock %}
+{% block title %}Iniciar Sesión - GymAI{% endblock %}
 
 {% block content %}
 <div class="formulario-container">
-    <h2>Iniciar sesión</h2>
+    <!-- Icono de login -->
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary-color);">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+            <polyline points="10,17 15,12 10,7"></polyline>
+            <line x1="15" y1="12" x2="3" y2="12"></line>
+        </svg>
+    </div>
+
+    <h2>Iniciar Sesión</h2>
+    <p style="margin-bottom: 2rem; color: var(--text-secondary);">Accede a tu cuenta para continuar con tu entrenamiento</p>
+    
     {% if error %}
-        <p class="error">{{ error }}</p>
+        <div class="error">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+            {{ error }}
+        </div>
     {% endif %}
-    <form method="POST">
-        <input type="text" name="identificador" placeholder="Correo o usuario" required>
-        <input type="password" name="password" placeholder="Contraseña" required>
-        <button type="submit" class="btn">Entrar</button>
+    
+    <form method="POST" novalidate>
+        <div class="input-group">
+            <label for="identificador" style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-weight: 500;">
+                Correo electrónico o usuario
+            </label>
+            <input 
+                type="text" 
+                id="identificador"
+                name="identificador" 
+                placeholder="Ingresa tu correo o usuario" 
+                required
+                autocomplete="username"
+                style="width: 100%;"
+            >
+        </div>
+        
+        <div class="input-group">
+            <label for="password" style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary); font-weight: 500;">
+                Contraseña
+            </label>
+            <input 
+                type="password" 
+                id="password"
+                name="password" 
+                placeholder="Ingresa tu contraseña" 
+                required
+                autocomplete="current-password"
+                style="width: 100%;"
+            >
+        </div>
+        
+        <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10,17 15,12 10,7"></polyline>
+                <line x1="15" y1="12" x2="3" y2="12"></line>
+            </svg>
+            Iniciar Sesión
+        </button>
     </form>
-    <p>¿No tienes cuenta? <a href="{{ url_for('auth.registro') }}">Regístrate aquí</a></p>
+    
+    <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+        <p style="margin-bottom: 0.5rem;">¿No tienes cuenta?</p>
+        <a href="{{ url_for('auth.registro') }}" style="font-weight: 600;">
+            Regístrate aquí
+        </a>
+    </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Mejorar la experiencia del usuario con validación en tiempo real
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        const inputs = form.querySelectorAll('input[required]');
+        
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim() === '') {
+                    this.style.borderColor = 'var(--error-color)';
+                } else {
+                    this.style.borderColor = 'var(--success-color)';
+                }
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.style.borderColor === 'rgb(255, 82, 82)') { // error color
+                    this.style.borderColor = 'var(--border-color)';
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}

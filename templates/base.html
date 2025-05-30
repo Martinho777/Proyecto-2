@@ -2,27 +2,94 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Mi Proyecto Fitness{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GymAI - Tu Entrenador Personal Inteligente{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="GymAI - Plataforma inteligente de entrenamiento físico personalizado con IA">
+    <meta name="keywords" content="gimnasio, entrenamiento, fitness, IA, personalizado">
+    <meta name="author" content="GymAI Team">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="{% block og_title %}GymAI - Tu Entrenador Personal Inteligente{% endblock %}">
+    <meta property="og:description" content="Plataforma inteligente de entrenamiento físico personalizado">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
+    <!-- Header con navegación -->
     <header>
         <nav>
             <ul class="navbar">
-                <li><a href="{{ url_for('inicio') }}">Inicio</a></li>
-                <li><a href="{{ url_for('auth.login') }}">Iniciar sesión</a></li>
-                <li><a href="{{ url_for('auth.registro') }}">Registrarse</a></li>
-                <li><a href="{{ url_for('auth.quienes') }}">¿Quiénes somos?</a></li>
+                <li><a href="{{ url_for('inicio') }}" {% if request.endpoint == 'inicio' %}class="active"{% endif %}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                    </svg>
+                    Inicio
+                </a></li>
+                
+                <li><a href="{{ url_for('auth.login') }}" {% if request.endpoint == 'auth.login' %}class="active"{% endif %}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                        <polyline points="10,17 15,12 10,7"></polyline>
+                        <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
+                    Iniciar Sesión
+                </a></li>
+                
+                <li><a href="{{ url_for('auth.registro') }}" {% if request.endpoint == 'auth.registro' %}class="active"{% endif %}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                    Registrarse
+                </a></li>
+                
+                <li><a href="{{ url_for('auth.quienes') }}" {% if request.endpoint == 'auth.quienes' %}class="active"{% endif %}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    ¿Quiénes Somos?
+                </a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Contenido principal -->
     <main>
         {% block content %}{% endblock %}
     </main>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 - Proyecto Fitness</p>
+        <div class="footer-content">
+            <p>&copy; 2025 GymAI - Tu Entrenador Personal Inteligente</p>
+            <p>Desarrollado con  para transformar tu experiencia fitness</p>
+        </div>
     </footer>
+
+    <!-- Scripts -->
+    {% block scripts %}{% endblock %}
+    
+    <!-- Analytics o scripts adicionales -->
+    {% block extra_scripts %}{% endblock %}
 </body>
 </html>
