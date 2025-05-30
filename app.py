@@ -107,7 +107,8 @@ def logout():
 def calendario():
     if 'usuario' not in session:
         return redirect('/login')
-    return render_template('dashboard.html', active_page='calendario', user=session['usuario'])
+
+    return render_template('calendario.html')
 
 @app.route('/musculos')
 def musculos():
@@ -126,13 +127,34 @@ def musculos():
 def estadisticas():
     if 'usuario' not in session:
         return redirect('/login')
-    return render_template('dashboard.html', active_page='estadisticas', user=session['usuario'])
+
+    query1 = """
+    MATCH (e:Ejercicio)-[:ACTIVA_PRIMARIO|:ACTIVA_SECUNDARIO]->(:SubMusculo)-[:PERTENECE_A]->(g:GrupoMuscular)
+    RETURN g.nombre AS grupo, COUNT(DISTINCT e) AS total_ejercicios
+    ORDER BY grupo
+    """
+    grupo_stats = graph.run(query1).data()
+
+    query2 = """
+    MATCH (e:Ejercicio)-[:ES_TIPO]->(t:Tipo)
+    RETURN t.nombre AS tipo, COUNT(e) AS cantidad
+    """
+    tipo_stats = graph.run(query2).data()
+
+    query3 = """
+    MATCH (e:Ejercicio)-[:REQUIERE_NIVEL]->(n:Nivel)
+    RETURN n.nombre AS nivel, COUNT(e) AS cantidad
+    """
+    nivel_stats = graph.run(query3).data()
+
+    return render_template('estadisticas.html', grupos=grupo_stats, tipos=tipo_stats, niveles=nivel_stats)
 
 @app.route('/perfil')
 def perfil():
     if 'usuario' not in session:
         return redirect('/login')
-    return render_template('dashboard.html', active_page='perfil', user=session['usuario'])
+
+    return render_template('perfil.html', usuario=session['usuario'])
 
 @app.route('/nuevo-ejercicio')
 def nuevo_ejercicio():
@@ -172,3 +194,5 @@ def detalle_ejercicio(nombre):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+    
