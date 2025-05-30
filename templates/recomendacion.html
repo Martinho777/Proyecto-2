@@ -72,8 +72,9 @@
     
     .muscle-icon {
         margin-right: var(--spacing-xs);
-        width: 20px;
-        height: 20px;
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
     }
     
     .nivel-select {
@@ -233,27 +234,107 @@
                 </p>
                 
                 <div class="muscle-groups">
-                    {% set muscle_icons = {
-                        "Espalda": "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
-                        "Pecho": "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z",
-                        "Hombros": "M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83",
-                        "Brazos": "M18 20V10M12 20V4M6 20v-6",
-                        "Antebrazo": "M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z",
-                        "Core": "M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83",
-                        "Pierna": "M18 20V10M12 20V4M6 20v-6"
-                    } %}
-                    
-                    {% for grupo in ["Espalda", "Pecho", "Hombros", "Brazos", "Antebrazo", "Core", "Pierna"] %}
+                    <!-- Espalda -->
                     <div class="muscle-group-item">
-                        <input type="checkbox" name="grupos" value="{{ grupo }}" id="grupo_{{ loop.index }}" class="muscle-checkbox">
-                        <label for="grupo_{{ loop.index }}" class="muscle-label">
+                        <input type="checkbox" name="grupos" value="Espalda" id="grupo_espalda" class="muscle-checkbox">
+                        <label for="grupo_espalda" class="muscle-label">
                             <svg class="muscle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="{{ muscle_icons[grupo] }}"></path>
+                                <!-- Silueta de espalda con músculos -->
+                                <path d="M12 2C10 2 8 3 8 5v3c0 1-1 2-2 3v8c0 1 1 2 2 2h8c1 0 2-1 2-2v-8c-1-1-2-2-2-3V5c0-2-2-3-4-3z"/>
+                                <path d="M10 6h4M9 9h6M8 12h8"/>
                             </svg>
-                            {{ grupo }}
+                            Espalda
                         </label>
                     </div>
-                    {% endfor %}
+                    
+                    <!-- Pecho -->
+                    <div class="muscle-group-item">
+                        <input type="checkbox" name="grupos" value="Pecho" id="grupo_pecho" class="muscle-checkbox">
+                        <label for="grupo_pecho" class="muscle-label">
+                            <svg class="muscle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <!-- Pectorales -->
+                                <ellipse cx="9" cy="10" rx="3" ry="4"/>
+                                <ellipse cx="15" cy="10" rx="3" ry="4"/>
+                                <path d="M12 6v8"/>
+                            </svg>
+                            Pecho
+                        </label>
+                    </div>
+                    
+                    <!-- Hombros -->
+                    <div class="muscle-group-item">
+                        <input type="checkbox" name="grupos" value="Hombros" id="grupo_hombros" class="muscle-checkbox">
+                        <label for="grupo_hombros" class="muscle-label">
+                            <svg class="muscle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <!-- Deltoides -->
+                                <circle cx="7" cy="8" r="3"/>
+                                <circle cx="17" cy="8" r="3"/>
+                                <path d="M12 5v6"/>
+                                <path d="M7 11l5-3 5 3"/>
+                            </svg>
+                            Hombros
+                        </label>
+                    </div>
+                    
+                    <!-- Brazos -->
+                    <div class="muscle-group-item">
+                        <input type="checkbox" name="grupos" value="Brazos" id="grupo_brazos" class="muscle-checkbox">
+                        <label for="grupo_brazos" class="muscle-label">
+                            <svg class="muscle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <!-- Bíceps y tríceps -->
+                                <ellipse cx="6" cy="12" rx="2" ry="6"/>
+                                <ellipse cx="18" cy="12" rx="2" ry="6"/>
+                                <path d="M8 8c1-1 2-1 3 0"/>
+                                <path d="M13 8c1-1 2-1 3 0"/>
+                            </svg>
+                            Brazos
+                        </label>
+                    </div>
+                    
+                    <!-- Antebrazo -->
+                    <div class="muscle-group-item">
+                        <input type="checkbox" name="grupos" value="Antebrazo" id="grupo_antebrazo" class="muscle-checkbox">
+                        <label for="grupo_antebrazo" class="muscle-label">
+                            <svg class="muscle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <!-- Antebrazos -->
+                                <rect x="5" y="14" width="3" height="8" rx="1"/>
+                                <rect x="16" y="14" width="3" height="8" rx="1"/>
+                                <path d="M6.5 14v-2M17.5 14v-2"/>
+                                <circle cx="6.5" cy="22" r="1"/>
+                                <circle cx="17.5" cy="22" r="1"/>
+                            </svg>
+                            Antebrazo
+                        </label>
+                    </div>
+                    
+                    <!-- Core -->
+                    <div class="muscle-group-item">
+                        <input type="checkbox" name="grupos" value="Core" id="grupo_core" class="muscle-checkbox">
+                        <label for="grupo_core" class="muscle-label">
+                            <svg class="muscle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <!-- Abdominales -->
+                                <rect x="9" y="8" width="6" height="10" rx="2"/>
+                                <path d="M9 11h6M9 14h6M9 17h6"/>
+                                <path d="M12 8V6"/>
+                            </svg>
+                            Core
+                        </label>
+                    </div>
+                    
+                    <!-- Pierna -->
+                    <div class="muscle-group-item">
+                        <input type="checkbox" name="grupos" value="Pierna" id="grupo_pierna" class="muscle-checkbox">
+                        <label for="grupo_pierna" class="muscle-label">
+                            <svg class="muscle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <!-- Cuádriceps y glúteos -->
+                                <ellipse cx="8" cy="14" rx="2" ry="8"/>
+                                <ellipse cx="16" cy="14" rx="2" ry="8"/>
+                                <path d="M8 6c0-1 1-2 2-2h4c1 0 2 1 2 2v2H8V6z"/>
+                                <path d="M10 8v4M14 8v4"/>
+                            </svg>
+                            Pierna
+                        </label>
+                    </div>
                 </div>
                 
                 <div class="selection-counter" id="selectionCounter" style="display: none;">

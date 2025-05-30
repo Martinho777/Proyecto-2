@@ -4,79 +4,403 @@
 
 {% block og_title %}GymAI - Transforma tu Entrenamiento con IA{% endblock %}
 
-{% block content %}
-<div class="inicio-contenedor">
-    <!-- Logo o icono principal -->
-    <div class="logo-container" style="text-align: center; margin-bottom: 2rem;">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary-color);">
-            <path d="M6.5 6.5h.01"></path>
-            <path d="M6.5 17.5h.01"></path>
-            <path d="M17.5 6.5h.01"></path>
-            <path d="M17.5 17.5h.01"></path>
-            <path d="M9 12h6"></path>
-            <path d="M12 9v6"></path>
-            <rect x="2" y="2" width="20" height="20" rx="2"></rect>
-        </svg>
-    </div>
-
-    <h1>Bienvenido a GymAI</h1>
-    <p>Tu plataforma inteligente de entrenamiento físico personalizado. Descubre el poder de la inteligencia artificial aplicada al fitness.</p>
+{% block extra_head %}
+<style>
+    /* Estilos específicos para la página de inicio */
+    .inicio-hero {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        min-height: 100vh;
+        align-items: center;
+        gap: 0;
+        padding: 0;
+        margin: 0;
+        max-width: none;
+        width: 100%;
+    }
     
-    <!-- Características destacadas -->
-    <div class="features-preview" style="margin: 2rem 0; text-align: left;">
-        <div class="feature-item" style="display: flex; align-items: center; margin-bottom: 1rem; color: var(--text-secondary);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.75rem; color: var(--primary-color);">
-                <path d="M9 12l2 2 4-4"></path>
-                <circle cx="12" cy="12" r="10"></circle>
-            </svg>
-            <span>Entrenamientos personalizados con IA</span>
-        </div>
+    .hero-image {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+    
+    /* Overlay para mejor contraste y efecto visual */
+    .hero-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            135deg, 
+            rgba(0, 0, 0, 0.4) 0%, 
+            rgba(253, 216, 53, 0.2) 50%,
+            rgba(0, 0, 0, 0.3) 100%
+        );
+        z-index: 1;
+    }
+    
+    /* Texto sobre la imagen */
+    .hero-image-overlay {
+        position: absolute;
+        bottom: 3rem;
+        left: 3rem;
+        z-index: 2;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+    
+    .hero-image-overlay h3 {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--primary-color), #fff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .hero-image-overlay p {
+        margin: 0.5rem 0 0 0;
+        font-size: 1.2rem;
+        opacity: 0.95;
+        font-weight: 500;
+    }
+    
+    .hero-content {
+        padding: var(--spacing-xl);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+        background: var(--surface-color);
+        position: relative;
+    }
+    
+    .hero-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, var(--primary-color), var(--primary-dark));
+    }
+    
+    .logo-container {
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .logo-container svg {
+        color: var(--primary-color);
+        filter: drop-shadow(0 0 20px rgba(253, 216, 53, 0.3));
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: var(--spacing-md);
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.3rem;
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-xl);
+        line-height: 1.6;
+    }
+    
+    .features-preview {
+        margin: var(--spacing-xl) 0;
+    }
+    
+    .feature-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: var(--spacing-md);
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        transition: var(--transition);
+    }
+    
+    .feature-item:hover {
+        color: var(--text-primary);
+        transform: translateX(5px);
+    }
+    
+    .feature-item svg {
+        margin-right: var(--spacing-sm);
+        color: var(--primary-color);
+        flex-shrink: 0;
+    }
+    
+    .hero-actions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-xl);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        color: var(--secondary-color);
+        font-size: 1.1rem;
+        padding: var(--spacing-md) var(--spacing-xl);
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(253, 216, 53, 0.3);
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(253, 216, 53, 0.4);
+    }
+    
+    .btn-secondary {
+        background: transparent;
+        border: 2px solid var(--primary-color);
+        color: var(--primary-color);
+        font-size: 1.1rem;
+        padding: var(--spacing-md) var(--spacing-xl);
+        font-weight: 600;
+    }
+    
+    .btn-secondary:hover {
+        background: rgba(253, 216, 53, 0.1);
+        transform: translateY(-2px);
+    }
+    
+    .btn-tertiary {
+        background: transparent;
+        color: var(--text-secondary);
+        border: 1px solid var(--border-color);
+        font-size: 1rem;
+        padding: var(--spacing-sm) var(--spacing-lg);
+        font-weight: 500;
+    }
+    
+    .btn-tertiary:hover {
+        background: var(--background-color);
+        color: var(--text-primary);
+        border-color: var(--primary-color);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .inicio-hero {
+            grid-template-columns: 1fr;
+            min-height: auto;
+        }
         
-        <div class="feature-item" style="display: flex; align-items: center; margin-bottom: 1rem; color: var(--text-secondary);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.75rem; color: var(--primary-color);">
-                <path d="M9 12l2 2 4-4"></path>
-                <circle cx="12" cy="12" r="10"></circle>
-            </svg>
-            <span>Seguimiento de progreso en tiempo real</span>
-        </div>
+        .hero-image {
+            height: 60vh;
+            order: 2;
+        }
         
-        <div class="feature-item" style="display: flex; align-items: center; margin-bottom: 1rem; color: var(--text-secondary);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.75rem; color: var(--primary-color);">
-                <path d="M9 12l2 2 4-4"></path>
-                <circle cx="12" cy="12" r="10"></circle>
-            </svg>
-            <span>Visualización muscular interactiva</span>
+        .hero-content {
+            height: auto;
+            order: 1;
+            padding: var(--spacing-lg);
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        
+        .hero-image-overlay {
+            bottom: 2rem;
+            left: 2rem;
+        }
+        
+        .hero-image-overlay h3 {
+            font-size: 1.5rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .hero-image {
+            height: 50vh;
+        }
+        
+        .hero-content {
+            padding: var(--spacing-md);
+        }
+        
+        .hero-title {
+            font-size: 2rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+        
+        .hero-actions {
+            gap: var(--spacing-sm);
+        }
+        
+        .hero-image-overlay {
+            bottom: 1rem;
+            left: 1rem;
+        }
+        
+        .hero-image-overlay h3 {
+            font-size: 1.2rem;
+        }
+        
+        .hero-image-overlay p {
+            font-size: 1rem;
+        }
+    }
+    
+    /* Animaciones */
+    @keyframes fadeInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    .hero-content {
+        animation: fadeInRight 0.8s ease-out;
+    }
+    
+    .hero-image {
+        animation: fadeInLeft 0.8s ease-out;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="inicio-hero">
+    <!-- Imagen del héroe (lado izquierdo) -->
+    <div class="hero-image">
+        <img src="{{ url_for('static', filename='img/gigachad.jpeg') }}" 
+             alt="GigaChad - Inspiración fitness" 
+             loading="lazy">
+        
+        <!-- Texto sobre la imagen -->
+        <div class="hero-image-overlay">
+            <h3>Tu Mejor Versión</h3>
+            <p>Alcanza tu máximo potencial</p>
         </div>
     </div>
+    
+    <!-- Contenido del héroe (lado derecho) -->
+    <div class="hero-content">
+        <!-- Logo -->
+        <div class="logo-container">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6.5 6.5h.01"></path>
+                <path d="M6.5 17.5h.01"></path>
+                <path d="M17.5 6.5h.01"></path>
+                <path d="M17.5 17.5h.01"></path>
+                <path d="M9 12h6"></path>
+                <path d="M12 9v6"></path>
+                <rect x="2" y="2" width="20" height="20" rx="2"></rect>
+            </svg>
+        </div>
 
-    <div class="botones-inicio">
-        <a href="{{ url_for('auth.login') }}" class="btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
-                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                <polyline points="10,17 15,12 10,7"></polyline>
-                <line x1="15" y1="12" x2="3" y2="12"></line>
-            </svg>
-            Iniciar Sesión
-        </a>
+        <h1 class="hero-title">GymAI</h1>
+        <p class="hero-subtitle">
+            Tu plataforma inteligente de entrenamiento físico personalizado. 
+            Descubre el poder de la inteligencia artificial aplicada al fitness.
+        </p>
         
-        <a href="{{ url_for('auth.registro') }}" class="btn" style="background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color);">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="8.5" cy="7" r="4"></circle>
-                <line x1="20" y1="8" x2="20" y2="14"></line>
-                <line x1="23" y1="11" x2="17" y2="11"></line>
-            </svg>
-            Crear Cuenta Gratis
-        </a>
-        
-        <a href="{{ url_for('auth.quienes') }}" class="btn" style="background: transparent; color: var(--text-secondary); border: 1px solid var(--border-color);">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                <line x1="12" y1="17" x2="12.01" y2="17"></line>
-            </svg>
-            Conoce Más
-        </a>
+        <!-- Características destacadas -->
+        <div class="features-preview">
+            <div class="feature-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12l2 2 4-4"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                <span>Entrenamientos personalizados con IA</span>
+            </div>
+            
+            <div class="feature-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12l2 2 4-4"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                <span>Seguimiento de progreso en tiempo real</span>
+            </div>
+            
+            <div class="feature-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12l2 2 4-4"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                <span>Visualización muscular interactiva</span>
+            </div>
+            
+            <div class="feature-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12l2 2 4-4"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                <span>Análisis predictivo de rendimiento</span>
+            </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="hero-actions">
+            <a href="{{ url_for('auth.registro') }}" class="btn btn-primary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: var(--spacing-xs);">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                </svg>
+                Crear Cuenta Gratis
+            </a>
+            
+            <a href="{{ url_for('auth.login') }}" class="btn btn-secondary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: var(--spacing-xs);">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                    <polyline points="10,17 15,12 10,7"></polyline>
+                    <line x1="15" y1="12" x2="3" y2="12"></line>
+                </svg>
+                Iniciar Sesión
+            </a>
+            
+            <a href="{{ url_for('auth.quienes') }}" class="btn btn-tertiary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: var(--spacing-xs);">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                Conoce Más Sobre GymAI
+            </a>
+        </div>
     </div>
 </div>
 {% endblock %}

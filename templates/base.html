@@ -30,7 +30,8 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-    <!-- Header con navegación -->
+    <!-- Header con navegación - Solo mostrar si NO está logueado -->
+    {% if not session.get('logged_in') %}
     <header>
         <nav>
             <ul class="navbar">
@@ -72,19 +73,22 @@
             </ul>
         </nav>
     </header>
+    {% endif %}
 
     <!-- Contenido principal -->
-    <main>
+    <main {% if session.get('logged_in') %}style="min-height: 100vh;"{% endif %}>
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer -->
+    <!-- Footer - Solo mostrar si NO está logueado -->
+    {% if not session.get('logged_in') %}
     <footer>
         <div class="footer-content">
             <p>&copy; 2025 GymAI - Tu Entrenador Personal Inteligente</p>
             <p>Desarrollado con  para transformar tu experiencia fitness</p>
         </div>
     </footer>
+    {% endif %}
 
     <!-- Scripts -->
     {% block scripts %}{% endblock %}

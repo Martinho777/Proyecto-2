@@ -3,7 +3,7 @@
 
 Este proyecto implementa un sistema de recomendación de ejercicios usando *Neo4j* como base de datos, *Cypher* como lenguaje de consulta, y *Flask (Python)* como backend para recibir las solicitudes de los usuarios.
 
-## 📌 Objetivo
+##  Objetivo
 
 El sistema genera una rutina de ejercicios personalizada para cada usuario, basada en:
 •⁠  ⁠Los *grupos musculares* que desea entrenar (máximo 3).
@@ -13,9 +13,9 @@ El sistema recomienda ejercicios de forma ordenada, priorizando los *ejercicios 
 
 ---
 
-## 📊 Modelo de Datos (Nodos y Relaciones en Neo4j)
+##  Modelo de Datos (Nodos y Relaciones en Neo4j)
 
-### 🧩 Nodos
+###  Nodos
 
 •⁠  ⁠⁠ Ejercicio ⁠
 •⁠  ⁠⁠ GrupoMuscular ⁠
@@ -36,9 +36,9 @@ El sistema recomienda ejercicios de forma ordenada, priorizando los *ejercicios 
 
 ---
 
-## 📌 Información de Referencia
+## Información de Referencia
 
-### 🎯 Grupos Musculares
+###  Grupos Musculares
 
 •⁠  ⁠"Espalda"
 •⁠  ⁠"Pecho"
@@ -48,7 +48,7 @@ El sistema recomienda ejercicios de forma ordenada, priorizando los *ejercicios 
 •⁠  ⁠"Core"
 •⁠  ⁠"Pierna"
 
-### 🎯 SubMúsculos
+###  SubMúsculos
 
 •⁠  ⁠"Dorsal ancho"
 •⁠  ⁠"Trapecio"
@@ -78,20 +78,20 @@ El sistema recomienda ejercicios de forma ordenada, priorizando los *ejercicios 
 •⁠  ⁠"Soleo"
 •⁠  ⁠"Gastrocnemio"
 
-### 🎯 Niveles de Usuario
+###  Niveles de Usuario
 
 •⁠  ⁠"Principiante"
 •⁠  ⁠"Intermedio"
 •⁠  ⁠"Avanzado"
 
-### 🎯 Tipos de Ejercicio
+###  Tipos de Ejercicio
 
 •⁠  ⁠"Aislado"
 •⁠  ⁠"Compuesto"
 
 ---
 
-## 🧩 Lógica de Recomendación (Query Cypher)
+## Lógica de Recomendación (Query Cypher)
 
 El sistema recibe:
 •⁠  ⁠Un *array de grupos musculares* (mínimo 1, máximo 3).
@@ -108,23 +108,7 @@ El algoritmo:
 
 ---
 
-## 🖥️ Próximos Pasos
-
-✅ Desarrollar el *backend en Flask* para:
-•⁠  ⁠Recibir los parámetros del usuario (⁠ gruposMusculares ⁠, ⁠ nivelUsuario ⁠) mediante un endpoint.
-•⁠  ⁠Ejecutar el query Cypher en Neo4j.
-•⁠  ⁠Devolver la lista de ejercicios recomendados como respuesta JSON.
-
-✅ Configurar la conexión a *Neo4j* en Flask de forma eficiente:
-•⁠  ⁠Usar el driver oficial de Neo4j para Python (⁠ neo4j ⁠).
-•⁠  ⁠Manejar conexiones de forma segura y cerrarlas correctamente.
-
-✅ Implementar validaciones:
-•⁠  ⁠Verificar que el usuario envíe *entre 1 y 3 grupos musculares*.
-•⁠  ⁠Validar que el nivel del usuario sea uno de los permitidos.
-•⁠  ⁠Controlar errores por datos inválidos o conexiones fallidas.
-
-✅ Ejemplo de solicitud esperada en el backend:
+Ejemplo de solicitud esperada en el backend:
 ```json
 {
   "gruposMusculares": ["Espalda", "Pecho"],
