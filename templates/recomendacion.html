@@ -1,0 +1,31 @@
+<!-- templates/recomendacion.html -->
+<h1>Recomendador de Ejercicios</h1>
+
+<form action="/recomendaciones" method="POST">
+  <label>Grupos musculares (máx 3):</label><br>
+  {% for grupo in ["Espalda", "Pecho", "Hombros", "Brazos", "Antebrazo", "Core", "Pierna"] %}
+    <input type="checkbox" name="grupos" value="{{ grupo }}"> {{ grupo }}<br>
+  {% endfor %}
+
+  <br>
+  <label>Nivel:</label>
+  <select name="nivel" required>
+    <option value="Principiante">Principiante</option>
+    <option value="Intermedio">Intermedio</option>
+    <option value="Avanzado">Avanzado</option>
+  </select><br><br>
+
+  <button type="submit">Generar rutina</button>
+</form>
+
+{% if ejercicios %}
+  <hr>
+  <h2>Ejercicios recomendados:</h2>
+  <ul>
+    {% for e in ejercicios %}
+      <li><strong>{{ e.nombre }}</strong> ({{ e.tipo }})</li>
+    {% endfor %}
+  </ul>
+{% elif ejercicios is not none %}
+  <p><strong>No se encontraron ejercicios para tu selección.</strong></p>
+{% endif %}

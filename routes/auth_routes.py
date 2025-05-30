@@ -1,10 +1,9 @@
-# routes/auth_routes.py
-
 from flask import Blueprint, render_template, request, redirect, session, url_for
 from database import graph
 
 auth_bp = Blueprint('auth', __name__)
 
+# ------------------ REGISTRO ------------------ #
 @auth_bp.route('/registro', methods=['GET', 'POST'])
 def registro():
     error = None
@@ -23,6 +22,7 @@ def registro():
             'dias_entreno': request.form['dias_entreno']
         }
 
+        # Validar si ya existe un usuario con ese email o username
         existe = graph.run(
             """MATCH (u:Usuario)
                WHERE u.email = $email OR u.usuario = $usuario
@@ -33,6 +33,7 @@ def registro():
         if existe:
             error = "Correo o usuario ya registrado."
         else:
+            # Crear nodo Usuario
             graph.run(
                 """CREATE (u:Usuario {
                     telefono: $telefono,
@@ -54,6 +55,7 @@ def registro():
     return render_template('registro.html', error=error)
 
 
+# ------------------ LOGIN ------------------ #
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
@@ -76,19 +78,21 @@ def login():
                 'nivel': usuario['nivel'],
                 'email': usuario['email']
             }
-            return redirect(url_for('dashboard.inicio_dashboard'))
+            return redirect(url_for('dashboard.recomendaciones'))  # ← Corregido aquí
         else:
             error = "Usuario o contraseña incorrectos."
 
     return render_template('login.html', error=error)
 
 
+# ------------------ LOGOUT ------------------ #
 @auth_bp.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('auth.login'))
 
 
+# ------------------ QUIÉNES SOMOS ------------------ #
 @auth_bp.route('/quienes')
 def quienes():
     return render_template('quienes.html')
