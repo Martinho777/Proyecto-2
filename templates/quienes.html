@@ -3,73 +3,121 @@
 {% block title %}¿Quiénes Somos? - GymAI{% endblock %}
 
 {% block content %}
-<section class="about-section container">
-  <h1>Quiénes Somos</h1>
-  <p>
-    Somos <strong>GymAI</strong>, un equipo de estudiantes apasionados por el fitness y la tecnología.
-    Nuestro objetivo es facilitar a cualquier persona la creación de rutinas inteligentes
-    mediante recomendaciones basadas en grafos e inteligencia artificial.
-  </p>
-</section>
-
-<section class="mission-section container">
-  <h2>Nuestro Objetivo</h2>
-  <p>
-    Queremos motivar a los usuarios a lograr sus metas físicas ofreciéndoles planes de
-    entrenamiento adaptados a su nivel, objetivos y equipo disponible. Creemos que
-    la personalización es la clave para la constancia y el progreso real.
-  </p>
-</section>
-
-<section class="team-section" style="display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 40px 20px;">
-  <!-- Tarjeta 1 -->
-  <div class="team-card" style="display: flex; align-items: center; gap: 20px; max-width: 900px;">
-    <img src="{{ url_for('static', filename='img/integrante1.jpeg') }}" alt="Foto Integrante 1" style="width: 150px; height: auto; border-radius: 12px;">
-    <div class="team-text">
-      <h3>Javier Castillo – UX Pump Designer</h3>
-      <p>"Cosas malas le suceden a buenas personas."</p>
-      <p>Encargado de que la experiencia del usuario sea tan fluida como una buena sesión de cardio.
-        Diseña interfaces visuales motivadoras, intuitivas y atractivas para mantener a los usuarios 
-        comprometidos y satisfechos con su progreso.</p>
+<div class="formulario-container" style="max-width: 600px;">
+    <!-- Icono de información -->
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary-color);">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
     </div>
-  </div>
 
-  <!-- Tarjeta 2 -->
-  <div class="team-card" style="display: flex; align-items: center; gap: 20px; max-width: 900px;">
-    <img src="{{ url_for('static', filename='img/integrante2.jpg') }}" alt="Foto Integrante 2" style="width: 150px; height: auto; border-radius: 12px;">
-    <div class="team-text">
-      <h3>Martin Villatoro – Chief Fitness Visionary</h3>
-      <p>"Tú puedes ser lo que quieras ser."</p>
-      <p>Responsable de la dirección general del proyecto y la visión a largo plazo.
-        Este rol define los objetivos estratégicos de la página, supervisa el 
-        desarrollo de funcionalidades innovadoras y se asegura de que todo esté alineado
-        con la misión de promover una vida saludable.</p>
+    <h2>¿Quiénes Somos?</h2>
+    
+    <div style="text-align: left; margin-bottom: 2rem;">
+        <div style="margin-bottom: 1.5rem;">
+            <h3 style="color: var(--primary-color); margin-bottom: 0.75rem; display: flex; align-items: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                </svg>
+                Nuestra Misión
+            </h3>
+            <p>
+                Somos un equipo apasionado por el fitness y la tecnología. Nuestro proyecto busca revolucionar la forma en que las personas entrenan, combinando la ciencia del entrenamiento con herramientas de inteligencia artificial de vanguardia.
+            </p>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+            <h3 style="color: var(--primary-color); margin-bottom: 0.75rem; display: flex; align-items: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                </svg>
+                Tecnología Innovadora
+            </h3>
+            <p>
+                GymAI utiliza algoritmos avanzados para crear entrenamientos personalizados basados en tus objetivos, nivel de experiencia y progreso. Nuestra plataforma incluye visualizaciones musculares interactivas y análisis de datos en tiempo real.
+            </p>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+            <h3 style="color: var(--primary-color); margin-bottom: 0.75rem; display: flex; align-items: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                Compromiso Contigo
+            </h3>
+            <p>
+                Creemos que cada persona merece un entrenamiento personalizado y efectivo. Por eso, desarrollamos herramientas que se adaptan a tu ritmo de vida, preferencias y metas específicas, ayudándote a alcanzar tu mejor versión.
+            </p>
+        </div>
     </div>
-  </div>
-
-  <!-- Tarjeta 3 -->
-  <div class="team-card" style="display: flex; align-items: center; gap: 20px; max-width: 900px;">
-    <img src="{{ url_for('static', filename='img/integrante3.jpg') }}" alt="Foto Integrante 3" style="width: 150px; height: auto; border-radius: 12px;">
-    <div class="team-text">
-      <h3>Jorge Morales – Workout Content Alchemist</h3>
-      <p>" "</p>
-      <p>Creador y curador maestro del contenido de ejercicios.
-        Diseña rutinas personalizadas, investiga nuevas tendencias fitness y adapta los 
-        planes de entrenamiento según el perfil del usuario. También traduce ciencia 
-        del ejercicio en recomendaciones prácticas.</p>
+    
+    <!-- Características destacadas -->
+    <div style="background: rgba(253, 216, 53, 0.1); border-radius: var(--border-radius); padding: 1.5rem; margin-bottom: 2rem; border: 1px solid rgba(253, 216, 53, 0.2);">
+        <h3 style="color: var(--primary-color); margin-bottom: 1rem; text-align: center;">¿Qué nos hace diferentes?</h3>
+        
+        <div style="display: grid; gap: 1rem;">
+            <div style="display: flex; align-items: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.75rem; color: var(--primary-color); flex-shrink: 0;">
+                    <path d="M9 12l2 2 4-4"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                <span style="color: var(--text-secondary);">Algoritmos de IA para entrenamientos personalizados</span>
+            </div>
+            
+            <div style="display: flex; align-items: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.75rem; color: var(--primary-color); flex-shrink: 0;">
+                    <path d="M9 12l2 2 4-4"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                <span style="color: var(--text-secondary);">Visualización muscular interactiva en 3D</span>
+            </div>
+            
+            <div style="display: flex; align-items: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.75rem; color: var(--primary-color); flex-shrink: 0;">
+                    <path d="M9 12l2 2 4-4"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                <span style="color: var(--text-secondary);">Seguimiento de progreso con análisis predictivo</span>
+            </div>
+            
+            <div style="display: flex; align-items: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.75rem; color: var(--primary-color); flex-shrink: 0;">
+                    <path d="M9 12l2 2 4-4"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                <span style="color: var(--text-secondary);">Interfaz intuitiva y fácil de usar</span>
+            </div>
+        </div>
     </div>
-  </div>
-</section>
-
-<section class="cta-section container" style="text-align: center; margin-top: 3rem;">
-  <p style="font-style: italic; color: var(--text-secondary); margin-bottom: 1.5rem;">
-    "Transformando vidas a través de la tecnología y el fitness"
-  </p>
-  <a href="{{ url_for('auth.registro') }}" class="btn" style="margin-right: 1rem;">
-    Únete Ahora
-  </a>
-  <a href="{{ url_for('auth.login') }}" class="btn" style="background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color);">
-    Iniciar Sesión
-  </a>
-</section>
+    
+    <div style="text-align: center;">
+        <p style="margin-bottom: 1.5rem; font-style: italic; color: var(--text-secondary);">
+            "Transformando vidas a través de la tecnología y el fitness"
+        </p>
+        
+        <a href="{{ url_for('auth.registro') }}" class="btn" style="margin-right: 1rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="8.5" cy="7" r="4"></circle>
+                <line x1="20" y1="8" x2="20" y2="14"></line>
+                <line x1="23" y1="11" x2="17" y2="11"></line>
+            </svg>
+            Únete Ahora
+        </a>
+        
+        <a href="{{ url_for('auth.login') }}" class="btn" style="background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem;">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10,17 15,12 10,7"></polyline>
+                <line x1="15" y1="12" x2="3" y2="12"></line>
+            </svg>
+            Iniciar Sesión
+        </a>
+    </div>
+</div>
 {% endblock %}
